@@ -8,6 +8,7 @@
 3. Weather: get the location of user, show the Weather data of that.
 
 ### prototypes
+These prototypes are made by Sketch, there only include export pngs.
 #### Expense page
 ![](./prototypes/1.png)
 #### Expense page when add an expense item
