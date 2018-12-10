@@ -1,19 +1,21 @@
-import React, { Component } from 'react'
-import { Route, Switch } from 'react-router-dom'
-
 import Expense from '../pages/Expense'
 import Currency from '../pages/Currency'
 
-class MuiRouter extends Component {
-  render() {
-    return(
-      <Switch>
-        <Route exact path='/' component={Currency} />
-        <Route path='/expense' component={Expense} />
-        <Route path='/currency' component={Currency} />
-      </Switch>
-    )
+export const routes = [
+  {
+    name: 'expense',
+    path: '/expense',
+    component: Expense,
+    title: 'Expense'
+  },{
+    name: 'currency',
+    path: '/currency',
+    component: Currency,
+    title: 'Currency'
+  },{
+    name: 'home',
+    path: '/',
+    component: Expense,
+    title: 'Expense'
   }
-}
-
-export default MuiRouter
+]

@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 
 class Expense extends Component {
   render(){
+    console.log(this.props);
     return(
-      <div></div>
+      <div>e</div>
     )
   }
 }
