@@ -1,11 +1,22 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router'
+import classNames from 'classnames'
 
+import { withStyles } from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
-// import { withStyles } from '@material-ui/core/styles'
 import { routes } from '../routes/routes'
 import Header from './Header'
 import Navbar from './Navbar'
+
+const styles = theme => ({
+  content: {
+    flexGrow: 1,
+    padding: theme.spacing.unit * 3,
+    height: '100vh',
+    overflow: 'auto',
+  },
+  appBarSpacer: theme.mixins.toolbar,
+})
 
 class Layout extends Component {
 
@@ -33,6 +44,7 @@ class Layout extends Component {
   }
 
   render(){
+    const { classes } = this.props
     return(
       <div style={{ display: 'flex' }}>
         <CssBaseline />
@@ -43,9 +55,14 @@ class Layout extends Component {
           drawerOpen={this.state.drawerOpen}
           handleDrawerClose={this.handleDrawerClose}  />
         {this.props.children}
+        <main className={classes.content}
+          >
+            <div className={classes.appBarSpacer} />
+            { this.props.children }
+        </main>
       </div>
     )
   }
 }
 
-export default withRouter(Layout)
+export default withRouter(withStyles(styles)(Layout))

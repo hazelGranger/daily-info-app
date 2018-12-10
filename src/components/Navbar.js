@@ -1,12 +1,19 @@
 import React from 'react'
 import classNames from 'classnames'
+import { Link } from 'react-router-dom'
 
 import { withStyles } from '@material-ui/core/styles'
 import Drawer from '@material-ui/core/Drawer'
 import Divider from '@material-ui/core/Divider'
 import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import ListItemText from '@material-ui/core/ListItemText'
 import IconButton from '@material-ui/core/IconButton'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
+import DashboardIcon from '@material-ui/icons/Dashboard'
+
+import { routes } from '../routes/routes'
 
 const drawerWidth = 240
 
@@ -37,6 +44,9 @@ const styles = theme => ({
     justifyContent: 'flex-end',
     padding: '0 8px',
     ...theme.mixins.toolbar,
+  },
+  navLink: {
+    textDecoration: 'none'
   }
 })
 
@@ -52,12 +62,26 @@ class Navbar extends React.Component {
         }}
       >
         <div className={classes.toolbarIcon}>
+          <span>logo</span>
           <IconButton onClick={this.props.handleDrawerClose}>
             <ChevronLeftIcon />
           </IconButton>
         </div>
         <Divider />
-        <List></List>
+        <List>
+          {
+            routes.map(r => r.name !== 'home' ? (
+              <Link to={r.path} key={r.name} className={classes.navLink}>
+                <ListItem  button>
+                  <ListItemIcon>
+                    { r.icon }
+                  </ListItemIcon>
+                  <ListItemText primary={r.title} />
+                </ListItem>
+              </Link>
+            ) : null)
+          }
+        </List>
       </Drawer>
     )
   }
