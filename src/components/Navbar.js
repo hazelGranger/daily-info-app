@@ -52,7 +52,7 @@ const styles = theme => ({
     textDecoration: 'none'
   },
   logo: {
-    color: '#FF6F61',
+    color: theme.primary,
     fontFamily: '"Shrikhand", "Roboto", "Helvetica", "Arial", sans-serif',
     fontSize: '24px',
     display: 'flex',
