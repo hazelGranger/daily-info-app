@@ -49,10 +49,12 @@ const styles = theme => ({
     ...theme.mixins.toolbar,
   },
   navLink: {
-    textDecoration: 'none'
+    textDecoration: 'none',
+    // overides the blue link color get a blue ripple
+    color: theme.palette.primary.main
   },
   logo: {
-    color: theme.primary,
+    color: theme.palette.primary.main,
     fontFamily: '"Shrikhand", "Roboto", "Helvetica", "Arial", sans-serif',
     fontSize: '24px',
     display: 'flex',
