@@ -59,7 +59,7 @@ function SimpleTable(props) {
                 <TableCell numeric>{n.carbs}</TableCell>
                 <TableCell numeric>{n.protein}</TableCell>
               </TableRow>
-            );
+            )
           })}
         </TableBody>
       </Table>

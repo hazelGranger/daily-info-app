@@ -54,7 +54,6 @@ class Layout extends Component {
         <Navbar
           drawerOpen={this.state.drawerOpen}
           handleDrawerClose={this.handleDrawerClose}  />
-        {this.props.children}
         <main className={classes.content}
           >
             <div className={classes.appBarSpacer} />
