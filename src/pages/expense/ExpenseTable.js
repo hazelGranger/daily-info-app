@@ -23,11 +23,6 @@ const expenseModel = [
     numeric: false,
     disablePadding: false,
     label: 'Type'
-  },{
-    id: 'operations',
-    numeric: false,
-    disablePadding: false,
-    label: ''
   }
 ]
 
