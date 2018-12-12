@@ -198,9 +198,9 @@ class EnhancedTable extends React.Component {
   }
 
   componentWillMount(){
-    if (this.props.data.length!==this.props.model.length) {
-      throw new Error('model and data can not match' )
-    }
+    // if (this.props.data.length!==this.props.model.length) {
+    //   throw new Error('model and data can not match' )
+    // }
   }
 
   handleRequestSort = (event, property) => {
@@ -293,12 +293,17 @@ class EnhancedTable extends React.Component {
                       {
                         model.map((m, index)=>{
                           return index===0 ? (
-                            <TableCell component="th" scope="row" padding="none">
+                            <TableCell key={index} component="th" scope="row" padding="none"
+                              numeric={model[index].numeric}
+                              padding={model[index].disablePadding ? 'none' : 'default'}
+                            >
                               {n[model[0].id]}
                             </TableCell>
                           ):(
-                            <TableCell
-                              numeric={model[index].numeric}>
+                            <TableCell key={index}
+                              numeric={model[index].numeric}
+                              padding={model[index].disablePadding ? 'none' : 'default'}
+                            >
                               {n[model[index].id]}
                             </TableCell>
                           )
