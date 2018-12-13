@@ -20,10 +20,18 @@ const initalState = [
   createData('Books', 10, '2018-11-11', 'learning'),
 ]
 
+// actions
+let ADD_EXPENSE_ITEM = 'ADD_EXPENSE_ITEM'
+
+
+export const addExpenseItem = (expense) => ({
+  type: ADD_EXPENSE_ITEM, payload: expense
+})
+
 const expense = (state=initalState, action) => {
   switch (action.type) {
-    case 'ADD_EXPENSE_ITEM':
-      return state
+    case ADD_EXPENSE_ITEM:
+      return [...state, action.payload]
     default:
       return state
   }

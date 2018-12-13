@@ -7,7 +7,6 @@ import ExpenseTable from './expense/ExpenseTable'
 
 class Expense extends Component {
   render(){
-    console.log(this.props);
     return(
       <div>
         <Grid container spacing={24}>

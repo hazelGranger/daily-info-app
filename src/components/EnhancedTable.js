@@ -16,6 +16,7 @@ import Checkbox from '@material-ui/core/Checkbox'
 import IconButton from '@material-ui/core/IconButton'
 import Tooltip from '@material-ui/core/Tooltip'
 import DeleteIcon from '@material-ui/icons/Delete'
+import AddIcon from '@material-ui/icons/Add'
 import FilterListIcon from '@material-ui/icons/FilterList'
 import { lighten } from '@material-ui/core/styles/colorManipulator'
 
@@ -120,14 +121,18 @@ const toolbarStyles = theme => ({
   },
   actions: {
     color: theme.palette.text.secondary,
+    display: 'flex',
   },
   title: {
     flex: '0 0 auto',
   },
+  addIcon :{
+    color: theme.palette.primary.main
+  }
 })
 
 let EnhancedTableToolbar = props => {
-  const { numSelected, classes, title } = props
+  const { numSelected, classes, title, hasAddItem, hasFilter } = props
 
   return (
     <Toolbar
@@ -155,11 +160,22 @@ let EnhancedTableToolbar = props => {
             </IconButton>
           </Tooltip>
         ) : (
-          <Tooltip title="Filter list">
-            <IconButton aria-label="Filter list">
-              <FilterListIcon />
-            </IconButton>
-          </Tooltip>
+          <React.Fragment>
+            {hasAddItem ? (
+              <Tooltip title="Add Item">
+                <IconButton aria-label="Add Item" className={classes.addIcon}>
+                  <AddIcon />
+                </IconButton>
+              </Tooltip>
+            ) : null }
+            {hasFilter ? (
+              <Tooltip title="Filter list">
+                <IconButton aria-label="Filter list">
+                  <FilterListIcon />
+                </IconButton>
+              </Tooltip>
+            ) : null }
+          </React.Fragment>
         )}
       </div>
     </Toolbar>
@@ -170,6 +186,8 @@ EnhancedTableToolbar.propTypes = {
   classes: PropTypes.object.isRequired,
   numSelected: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
+  hasAddItem: PropTypes.bool.isRequired,
+  hasFilter: PropTypes.bool.isRequired,
 }
 
 EnhancedTableToolbar = withStyles(toolbarStyles)(EnhancedTableToolbar)
@@ -248,13 +266,18 @@ class EnhancedTable extends React.Component {
   isSelected = id => this.state.selected.indexOf(id) !== -1
 
   render() {
-    const { classes, title, model } = this.props
+    const { classes, title, model, hasAddItem, hasFilter } = this.props
     const { data, order, orderBy, selected, rowsPerPage, page } = this.state
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage)
 
     return (
       <React.Fragment>
-        <EnhancedTableToolbar numSelected={selected.length} title={this.props.title} />
+        <EnhancedTableToolbar
+          numSelected={selected.length}
+          title={this.props.title}
+          hasAddItem={hasAddItem}
+          hasFilter={hasFilter}
+        />
         <div className={classes.tableWrapper}>
           <Table className={classes.table} aria-labelledby="tableTitle">
             <EnhancedTableHead
@@ -264,7 +287,7 @@ class EnhancedTable extends React.Component {
               onSelectAllClick={this.handleSelectAllClick}
               onRequestSort={this.handleRequestSort}
               rowCount={data.length}
-              model={this.props.model}
+              model={model}
             />
             <TableBody>
               {stableSort(data, getSorting(order, orderBy))
@@ -338,6 +361,8 @@ EnhancedTable.propTypes = {
   classes: PropTypes.object.isRequired,
   title: PropTypes.string.isRequired,
   model: PropTypes.array.isRequired,
+  hasAddItem: PropTypes.bool.isRequired,
+  hasFilter: PropTypes.bool.isRequired,
 }
 
 export default withStyles(styles)(EnhancedTable)
