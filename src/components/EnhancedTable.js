@@ -197,12 +197,6 @@ class EnhancedTable extends React.Component {
     rowsPerPage: 5,
   }
 
-  componentWillMount(){
-    // if (this.props.data.length!==this.props.model.length) {
-    //   throw new Error('model and data can not match' )
-    // }
-  }
-
   handleRequestSort = (event, property) => {
     const orderBy = property
     let order = 'desc'
