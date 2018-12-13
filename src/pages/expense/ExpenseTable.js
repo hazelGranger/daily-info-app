@@ -30,6 +30,7 @@ const expenseModel = [
 
 class ExpenseTable extends Component{
   render(){
+    const { handleAddItem } = this.props
     return(
       <EnhancedTable
         title='Expense Details'
@@ -37,6 +38,7 @@ class ExpenseTable extends Component{
         data={this.props.expense}
         hasAddItem={true}
         hasFilter={false}
+        handleAddItem={handleAddItem}
        />
     )
   }

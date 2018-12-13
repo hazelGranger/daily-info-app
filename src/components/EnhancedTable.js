@@ -131,55 +131,66 @@ const toolbarStyles = theme => ({
   }
 })
 
-let EnhancedTableToolbar = props => {
-  const { numSelected, classes, title, hasAddItem, hasFilter } = props
+class EnhancedTableToolbar extends React.Component {
 
-  return (
-    <Toolbar
-      className={classNames(classes.root, {
-        [classes.highlight]: numSelected > 0,
-      })}
-    >
-      <div className={classes.title}>
-        {numSelected > 0 ? (
-          <Typography color="inherit" variant="subtitle1">
-            {numSelected} selected
-          </Typography>
-        ) : (
-          <Typography variant="h6" id="tableTitle">
-            { title }
-          </Typography>
-        )}
-      </div>
-      <div className={classes.spacer} />
-      <div className={classes.actions}>
-        {numSelected > 0 ? (
-          <Tooltip title="Delete">
-            <IconButton aria-label="Delete">
-              <DeleteIcon />
-            </IconButton>
-          </Tooltip>
-        ) : (
-          <React.Fragment>
-            {hasAddItem ? (
-              <Tooltip title="Add Item">
-                <IconButton aria-label="Add Item" className={classes.addIcon}>
-                  <AddIcon />
-                </IconButton>
-              </Tooltip>
-            ) : null }
-            {hasFilter ? (
-              <Tooltip title="Filter list">
-                <IconButton aria-label="Filter list">
-                  <FilterListIcon />
-                </IconButton>
-              </Tooltip>
-            ) : null }
-          </React.Fragment>
-        )}
-      </div>
-    </Toolbar>
-  )
+  handleAddItem = () => {
+    console.log('add',this.props.AddItem);
+    this.props.AddItem()
+  }
+
+  render(){
+    const { numSelected, classes, title, hasAddItem, hasFilter} = this.props
+    return (
+      <Toolbar
+        className={classNames(classes.root, {
+          [classes.highlight]: numSelected > 0,
+        })}
+      >
+        <div className={classes.title}>
+          {numSelected > 0 ? (
+            <Typography color="inherit" variant="subtitle1">
+              {numSelected} selected
+            </Typography>
+          ) : (
+            <Typography variant="h6" id="tableTitle">
+              { title }
+            </Typography>
+          )}
+        </div>
+        <div className={classes.spacer} />
+        <div className={classes.actions}>
+          {numSelected > 0 ? (
+            <Tooltip title="Delete">
+              <IconButton aria-label="Delete">
+                <DeleteIcon />
+              </IconButton>
+            </Tooltip>
+          ) : (
+            <React.Fragment>
+              {hasAddItem ? (
+                <Tooltip title="Add Item">
+                  <IconButton
+                    aria-label="Add Item"
+                    className={classes.addIcon}
+                    onClick={this.handleAddItem}
+                  >
+                    <AddIcon />
+                  </IconButton>
+                </Tooltip>
+              ) : null }
+              {hasFilter ? (
+                <Tooltip title="Filter list">
+                  <IconButton aria-label="Filter list">
+                    <FilterListIcon />
+                  </IconButton>
+                </Tooltip>
+              ) : null }
+            </React.Fragment>
+          )}
+        </div>
+      </Toolbar>
+    )
+  }
 }
 
 EnhancedTableToolbar.propTypes = {
@@ -188,6 +199,7 @@ EnhancedTableToolbar.propTypes = {
   title: PropTypes.string.isRequired,
   hasAddItem: PropTypes.bool.isRequired,
   hasFilter: PropTypes.bool.isRequired,
+  AddItem: PropTypes.func,
 }
 
 EnhancedTableToolbar = withStyles(toolbarStyles)(EnhancedTableToolbar)
@@ -266,7 +278,7 @@ class EnhancedTable extends React.Component {
   isSelected = id => this.state.selected.indexOf(id) !== -1
 
   render() {
-    const { classes, title, model, hasAddItem, hasFilter } = this.props
+    const { classes, title, model, hasAddItem, hasFilter, handleAddItem } = this.props
     const { data, order, orderBy, selected, rowsPerPage, page } = this.state
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage)
 
@@ -277,6 +289,7 @@ class EnhancedTable extends React.Component {
           title={this.props.title}
           hasAddItem={hasAddItem}
           hasFilter={hasFilter}
+          AddItem={handleAddItem}
         />
         <div className={classes.tableWrapper}>
           <Table className={classes.table} aria-labelledby="tableTitle">
@@ -363,6 +376,7 @@ EnhancedTable.propTypes = {
   model: PropTypes.array.isRequired,
   hasAddItem: PropTypes.bool.isRequired,
   hasFilter: PropTypes.bool.isRequired,
+  handleAddItem: PropTypes.func,
 }
 
 export default withStyles(styles)(EnhancedTable)
