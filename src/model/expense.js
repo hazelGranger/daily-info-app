@@ -22,16 +22,22 @@ const initalState = [
 
 // actions
 let ADD_EXPENSE_ITEM = 'ADD_EXPENSE_ITEM'
+let DELETE_EXPENSE_ITEM = 'DELETE_EXPENSE_ITEM'
 
+export const addExpenseItem = (item) => ({
+  type: ADD_EXPENSE_ITEM, payload: { ...item, id: ++id, date: '2018-12-12'}
+})
 
-export const addExpenseItem = (expense) => ({
-  type: ADD_EXPENSE_ITEM, payload: { ...expense, id: ++id, date: '2018-12-12'}
+export const deleteExpenseItem = (items) => ({
+  type: DELETE_EXPENSE_ITEM, payload: items
 })
 
 const expense = (state=initalState, action) => {
   switch (action.type) {
     case ADD_EXPENSE_ITEM:
       return [...state, action.payload]
+    case DELETE_EXPENSE_ITEM:
+      return state.filter(v=>!action.payload.includes(v.id))
     default:
       return state
   }

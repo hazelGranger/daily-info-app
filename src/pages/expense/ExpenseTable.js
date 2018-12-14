@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
 import EnhancedTable from '../../components/EnhancedTable'
 import { addExpenseItem } from '../../model/expense.js'
@@ -30,18 +31,24 @@ const expenseModel = [
 
 class ExpenseTable extends Component{
   render(){
-    const { handleAddItem } = this.props
+    const { expense, handleAddItem, handleDeletItem } = this.props
     return(
       <EnhancedTable
         title='Expense Details'
         model={expenseModel}
-        data={this.props.expense}
+        data={expense}
         hasAddItem={true}
         hasFilter={false}
         handleAddItem={handleAddItem}
+        handleDeletItem={handleDeletItem}
        />
     )
   }
+}
+
+ExpenseTable.propTypes = {
+  handleAddItem: PropTypes.func,
+  handleDeletItem: PropTypes.func,
 }
 
 export default connect(

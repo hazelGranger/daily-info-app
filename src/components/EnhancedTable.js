@@ -51,7 +51,6 @@ class EnhancedTableHead extends React.Component {
 
   render() {
     const { onSelectAllClick, order, orderBy, numSelected, rowCount, model } = this.props
-
     return (
       <TableHead>
         <TableRow>
@@ -133,12 +132,17 @@ const toolbarStyles = theme => ({
 
 class EnhancedTableToolbar extends React.Component {
 
-  handleAddItem = () => {
-    this.props.AddItem()
-  }
+  // handleAddItem = () => {
+  //   this.props.addItem()
+  // }
+
+    // handleDeletItem = ()=> {
+    //   console.log('handleDeletItem', this.props.deleteItem);
+    //   this.props.deleteItem()
+    // }
 
   render(){
-    const { numSelected, classes, title, hasAddItem, hasFilter} = this.props
+    const { numSelected, classes, title, hasAddItem, hasFilter, addItem, deleteItem, selected } = this.props
     return (
       <Toolbar
         className={classNames(classes.root, {
@@ -161,7 +165,10 @@ class EnhancedTableToolbar extends React.Component {
           {numSelected > 0 ? (
             <Tooltip title="Delete">
               <IconButton aria-label="Delete">
-                <DeleteIcon />
+                <DeleteIcon
+                  aria-label="Delete Item"
+                  onClick={()=>deleteItem(selected)}
+                />
               </IconButton>
             </Tooltip>
           ) : (
@@ -171,7 +178,7 @@ class EnhancedTableToolbar extends React.Component {
                   <IconButton
                     aria-label="Add Item"
                     className={classes.addIcon}
-                    onClick={this.handleAddItem}
+                    onClick={addItem}
                   >
                     <AddIcon />
                   </IconButton>
@@ -198,7 +205,8 @@ EnhancedTableToolbar.propTypes = {
   title: PropTypes.string.isRequired,
   hasAddItem: PropTypes.bool.isRequired,
   hasFilter: PropTypes.bool.isRequired,
-  AddItem: PropTypes.func,
+  addItem: PropTypes.func,
+  deleteItem: PropTypes.func
 }
 
 EnhancedTableToolbar = withStyles(toolbarStyles)(EnhancedTableToolbar)
@@ -276,10 +284,9 @@ class EnhancedTable extends React.Component {
   isSelected = id => this.state.selected.indexOf(id) !== -1
 
   render() {
-    const { classes, title, model, hasAddItem, hasFilter, handleAddItem, data } = this.props
+    const { classes, title, model, data, hasAddItem, hasFilter, handleAddItem, handleDeletItem } = this.props
     const { order, orderBy, selected, rowsPerPage, page } = this.state
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage)
-
     return (
       <React.Fragment>
         <EnhancedTableToolbar
@@ -287,7 +294,9 @@ class EnhancedTable extends React.Component {
           title={this.props.title}
           hasAddItem={hasAddItem}
           hasFilter={hasFilter}
-          AddItem={handleAddItem}
+          addItem={handleAddItem}
+          deleteItem={handleDeletItem}
+          selected={selected}
         />
         <div className={classes.tableWrapper}>
           <Table className={classes.table} aria-labelledby="tableTitle">

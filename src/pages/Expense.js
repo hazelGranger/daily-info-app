@@ -6,7 +6,7 @@ import Paper from '@material-ui/core/Paper'
 
 import ExpenseTable from './expense/ExpenseTable'
 import ExpenseAddForm from './expense/ExpenseAddForm'
-import { addExpenseItem } from '../model/expense'
+import { addExpenseItem, deleteExpenseItem } from '../model/expense'
 
 class Expense extends Component {
   state = {
@@ -18,8 +18,11 @@ class Expense extends Component {
   }
 
   handleSubmit = item =>{
-    console.log('handleSubmit',item)
     this.props.addExpenseItem(item)
+  }
+
+  handleDeletItem = items => {
+    this.props.deleteExpenseItem(items)
   }
 
   render(){
@@ -28,7 +31,10 @@ class Expense extends Component {
         <Grid container spacing={24}>
           <Grid item xs={12}>
             <Paper>
-              <ExpenseTable handleAddItem={this.handleAddItem} />
+              <ExpenseTable
+                handleAddItem={this.handleAddItem}
+                handleDeletItem={this.handleDeletItem}
+               />
               <ExpenseAddForm
                 modalOpen={this.state.modalOpen}
                 handleSubmit={this.handleSubmit}
@@ -53,5 +59,8 @@ class Expense extends Component {
 
 export default connect(
   null,
-  { addExpenseItem }
+  {
+    addExpenseItem,
+    deleteExpenseItem,
+  }
 )(Expense)
