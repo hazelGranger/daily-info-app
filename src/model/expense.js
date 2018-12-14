@@ -25,7 +25,7 @@ let ADD_EXPENSE_ITEM = 'ADD_EXPENSE_ITEM'
 
 
 export const addExpenseItem = (expense) => ({
-  type: ADD_EXPENSE_ITEM, payload: expense
+  type: ADD_EXPENSE_ITEM, payload: { ...expense, id: ++id, date: '2018-12-12'}
 })
 
 const expense = (state=initalState, action) => {

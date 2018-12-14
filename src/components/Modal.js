@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 
 import { withStyles } from '@material-ui/core/styles'
 import MuiModal from '@material-ui/core/Modal'
-import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import Tooltip from '@material-ui/core/Tooltip'
 import IconButton from '@material-ui/core/IconButton'
@@ -37,6 +36,7 @@ const styles = theme => ({
   modalFooter: {
     padding: theme.spacing.unit * 3,
     paddingBottom: theme.spacing.unit * 4,
+    textAlign: 'right',
   }
 });
 
@@ -60,7 +60,7 @@ class Modal extends Component {
   }
 
   render(){
-    const { classes, title, children, open } = this.props
+    const { classes, title, children, open, handleSubmit, footer } = this.props
     return(
       <MuiModal
         aria-labelledby="simple-modal-title"
@@ -91,7 +91,7 @@ class Modal extends Component {
               { children }
             </div>
             <div className={classes.modalFooter}>
-              <Button variant="outlined" color="primary">Save</Button>
+              { footer }
             </div>
           </div>
       </MuiModal>

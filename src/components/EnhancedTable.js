@@ -221,7 +221,6 @@ class EnhancedTable extends React.Component {
     order: 'asc',
     orderBy: 'calories',
     selected: [],
-    data: this.props.data,
     page: 0,
     rowsPerPage: 5,
   }
@@ -239,7 +238,7 @@ class EnhancedTable extends React.Component {
 
   handleSelectAllClick = event => {
     if (event.target.checked) {
-      this.setState(state => ({ selected: state.data.map(n => n.id) }))
+      this.setState(state => ({ selected: this.props.data.map(n => n.id) }))
       return
     }
     this.setState({ selected: [] })
@@ -277,8 +276,8 @@ class EnhancedTable extends React.Component {
   isSelected = id => this.state.selected.indexOf(id) !== -1
 
   render() {
-    const { classes, title, model, hasAddItem, hasFilter, handleAddItem } = this.props
-    const { data, order, orderBy, selected, rowsPerPage, page } = this.state
+    const { classes, title, model, hasAddItem, hasFilter, handleAddItem, data } = this.props
+    const { order, orderBy, selected, rowsPerPage, page } = this.state
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage)
 
     return (

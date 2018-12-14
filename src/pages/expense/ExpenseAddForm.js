@@ -5,6 +5,7 @@ import React, { Component } from 'react'
 import classNames from 'classnames'
 import { withStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
+import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import TextField from '@material-ui/core/TextField'
 import FormLabel from '@material-ui/core/FormLabel'
@@ -15,6 +16,7 @@ import FoodIcon from '@material-ui/icons/Fastfood'
 import HouseIcon from '@material-ui/icons/Home'
 import BusIcon from '@material-ui/icons/DirectionsBus'
 import LearningIcon from '@material-ui/icons/LibraryBooks'
+import ClassIcon from '@material-ui/icons/Class'
 
 
 import Modal from '../../components/Modal'
@@ -27,7 +29,7 @@ const styles = theme => ({
     flexDirection: 'row',
   },
   groupLabel: {
-    marginTop: theme.spacing.unit * 2,
+    marginTop: theme.spacing.unit * 3,
   },
   radioLabel: {
     display: 'flex',
@@ -45,6 +47,8 @@ const styles = theme => ({
 
 class ExpenseAddForm extends Component{
   state = {
+    item: '',
+    price: null,
     type: 'food'
   }
 
@@ -52,22 +56,37 @@ class ExpenseAddForm extends Component{
     this.setState({ type: event.target.value })
   }
 
+  handleInputChange(type, value) {
+    this.setState({
+      [type]: value
+    })
+  }
+
+  // handleSubmit = () =>{
+  //   this.props.handleSubmit(this.state)
+  // }
+
   render(){
-    const { classes } = this.props
+    const { classes, handleSubmit } = this.props
     return(
       <Modal
         title="Add An Expense Item"
-        open={true/**this.props.modalOpen**/}
+        open={this.props.modalOpen}
+        footer={<Button
+          variant="outlined"
+          color="primary"
+          onClick={()=>handleSubmit(this.state)}>
+          Save</Button>}
       >
       <div className={classes.formContainer}>
         <Grid container spacing={24}>
           <Grid item xs={12} sm={6}>
             <TextField
               required
-              id="itemName"
-              name="itemName"
+              id="item"
+              name="item"
               label="Item Name"
-              autoComplete="fname"
+              onChange={event => this.handleInputChange('item', event.target.value)}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -77,6 +96,7 @@ class ExpenseAddForm extends Component{
               id="price"
               name="price"
               label="Price"
+              onChange={event => this.handleInputChange('price', event.target.value)}
             />
           </Grid>
           <Grid item xs={12} >
@@ -118,6 +138,14 @@ class ExpenseAddForm extends Component{
                 label={<Typography className={classNames(classes.radioLabel,
                   this.state.type==='learning' && classes.radioLabelActive)}>
                   <LearningIcon className={classes.radioIcon} />Learning</Typography>}
+                labelPlacement="bottom"
+              />
+              <FormControlLabel
+                value="others"
+                control={<Radio color="primary" />}
+                label={<Typography className={classNames(classes.radioLabel,
+                  this.state.type==='others' && classes.radioLabelActive)}>
+                  <ClassIcon className={classes.radioIcon} />Others</Typography>}
                 labelPlacement="bottom"
               />
             </RadioGroup>
