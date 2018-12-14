@@ -132,17 +132,8 @@ const toolbarStyles = theme => ({
 
 class EnhancedTableToolbar extends React.Component {
 
-  // handleAddItem = () => {
-  //   this.props.addItem()
-  // }
-
-    // handleDeletItem = ()=> {
-    //   console.log('handleDeletItem', this.props.deleteItem);
-    //   this.props.deleteItem()
-    // }
-
   render(){
-    const { numSelected, classes, title, hasAddItem, hasFilter, addItem, deleteItem, selected } = this.props
+    const { numSelected, classes, title, hasAddItem, hasFilter, addItem, deleteItem } = this.props
     return (
       <Toolbar
         className={classNames(classes.root, {
@@ -167,7 +158,7 @@ class EnhancedTableToolbar extends React.Component {
               <IconButton aria-label="Delete">
                 <DeleteIcon
                   aria-label="Delete Item"
-                  onClick={()=>deleteItem(selected)}
+                  onClick={()=>deleteItem()}
                 />
               </IconButton>
             </Tooltip>
@@ -281,10 +272,15 @@ class EnhancedTable extends React.Component {
     this.setState({ rowsPerPage: event.target.value })
   }
 
+  handleDeletItem = () => {
+    this.props.handleDeletItem(this.state.selected)
+    this.setState({selected: []})
+  }
+
   isSelected = id => this.state.selected.indexOf(id) !== -1
 
   render() {
-    const { classes, title, model, data, hasAddItem, hasFilter, handleAddItem, handleDeletItem } = this.props
+    const { classes, title, model, data, hasAddItem, hasFilter, handleAddItem } = this.props
     const { order, orderBy, selected, rowsPerPage, page } = this.state
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage)
     return (
@@ -295,8 +291,7 @@ class EnhancedTable extends React.Component {
           hasAddItem={hasAddItem}
           hasFilter={hasFilter}
           addItem={handleAddItem}
-          deleteItem={handleDeletItem}
-          selected={selected}
+          deleteItem={this.handleDeletItem}
         />
         <div className={classes.tableWrapper}>
           <Table className={classes.table} aria-labelledby="tableTitle">
