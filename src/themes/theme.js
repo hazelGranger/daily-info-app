@@ -19,4 +19,10 @@ export const theme =  createMuiTheme({
   typography: {
     useNextVariants: true,
   },
+  components: {
+    modal: {
+      headerPadding: '16px',
+      contentPadding: '24px',
+    }
+  }
 })

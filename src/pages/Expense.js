@@ -12,7 +12,6 @@ class Expense extends Component {
   }
 
   handleAddItem = () => {
-    console.log('handleAddItem');
     this.setState({ modalOpen: true })
   }
 

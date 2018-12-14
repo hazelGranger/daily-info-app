@@ -134,7 +134,6 @@ const toolbarStyles = theme => ({
 class EnhancedTableToolbar extends React.Component {
 
   handleAddItem = () => {
-    console.log('add',this.props.AddItem);
     this.props.AddItem()
   }
 

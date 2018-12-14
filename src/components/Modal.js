@@ -4,19 +4,40 @@ import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import MuiModal from '@material-ui/core/Modal'
 import Button from '@material-ui/core/Button'
+import Typography from '@material-ui/core/Typography'
+import Tooltip from '@material-ui/core/Tooltip'
+import IconButton from '@material-ui/core/IconButton'
+import ClearIcon from '@material-ui/icons/Clear'
 
 const styles = theme => ({
   paper: {
     position: 'absolute',
-    width: theme.spacing.unit * 50,
+    width: theme.spacing.unit * 70,
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[8],
-    padding: theme.spacing.unit * 4,
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
     outline: 'none',
   },
+  modalHeader: {
+    backgroundColor: theme.palette.primary.main,
+    padding: theme.components.modal.headerPadding,
+    position: 'relative',
+  },
+  modalTitle: {
+    color: theme.palette.primary.contrastText,
+  },
+  modolCloseIcon: {
+    position: 'absolute',
+    right: theme.components.modal.headerPadding,
+    top: theme.spacing.unit,
+    color: theme.palette.primary.contrastText,
+  },
+  modalFooter: {
+    padding: theme.spacing.unit * 3,
+    paddingBottom: theme.spacing.unit * 4,
+  }
 });
 
 class Modal extends Component {
@@ -29,7 +50,6 @@ class Modal extends Component {
   }
 
   handleClose = () =>{
-    console.log(123);
     this.setState({ open: false })
   }
 
@@ -41,7 +61,6 @@ class Modal extends Component {
 
   render(){
     const { classes, title, children, open } = this.props
-    console.log(open, this.state.open);
     return(
       <MuiModal
         aria-labelledby="simple-modal-title"
@@ -51,11 +70,28 @@ class Modal extends Component {
         >
           <div className={classes.paper}>
             <div className={classes.modalHeader}>
-              { title }
-              <Button onClick={this.handleClose}>Close Modal</Button>
+              <Typography
+                className={classes.modalTitle}
+                variant="h6"
+                gutterBottom
+              >
+                { title }
+              </Typography>
+              <Tooltip title="Close Modal">
+                <IconButton
+                  aria-label="Close Modal"
+                  onClick={this.handleClose}
+                  className={classes.modolCloseIcon}
+                >
+                  <ClearIcon />
+                </IconButton>
+              </Tooltip>
             </div>
             <div className={classes.modalBody}>
               { children }
+            </div>
+            <div className={classes.modalFooter}>
+              <Button variant="outlined" color="primary">Save</Button>
             </div>
           </div>
       </MuiModal>
