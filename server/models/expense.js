@@ -1,4 +1,4 @@
-import mongoose from 'mogoose'
+import mongoose from 'mongoose'
 
 const ExpenseSchema = new mongoose.Schema(
   {
@@ -9,6 +9,6 @@ const ExpenseSchema = new mongoose.Schema(
   }
 )
 
-const Expense = mogoose.model('Expense', ExpenseSchema)
+const Expense = mongoose.model('Expense', ExpenseSchema)
 
-export default mogoose.model('Expense')
+export default mongoose.model('Expense')

@@ -5,6 +5,7 @@ import BodyParser from 'koa-bodyparser'
 import Helmet from 'koa-helmet'
 import respond from 'koa-respond'
 import mongoose from 'mongoose'
+import { routes } from './routes'
 
 
 const app = new Koa()
@@ -21,12 +22,17 @@ app.use(BodyParser({
   }
 }))
 
-require('./routes')(router)
+routes(router)
 app.use(router.routes())
 app.use(router.allowedMethods())
 // const main = ctx => {
 //   ctx.response.body = 'Hello World'
 // }
+const port = 9093
+const db_url = 'mongodb://localhost:27017/daily-info'
 
-app.use(main)
-app.listen(3000)
+mongoose.connect(db_url)
+
+app.listen(port, () => {
+  console.log(`Server started on ${port}`)
+})
