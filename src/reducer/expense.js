@@ -16,7 +16,7 @@ const expense = (state=initalState, action) => {
       return action.expenseItems.map(v => {
         const {_id, date: date, ...item } = v
         const createdDate = new Date(date)
-        return {...item, id: _id, date: `${createdDate.getFullYear()}-${createdDate.getMonth()}-${createdDate.getDate()}`}
+        return {...item, id: _id, date: `${createdDate.getFullYear()}-${createdDate.getMonth()+1}-${createdDate.getDate()}`}
       })
     case DELETE_EXPENSE_ITEM:
       return state.filter(v=>!action.ids.includes(v.id))
