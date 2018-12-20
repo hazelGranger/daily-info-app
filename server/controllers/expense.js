@@ -11,7 +11,13 @@ async function findAll(ctx) {
   ctx.body = expenseItems
 }
 
+async function deleteSelected(ctx) {
+  const selectedItems = await Expense.remove({ _id: {$in: ctx.request.body} })
+  ctx.body = selectedItems
+}
+
 export default {
   create,
-  findAll
+  findAll,
+  deleteSelected
 }

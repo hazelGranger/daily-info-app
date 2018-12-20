@@ -5,6 +5,6 @@ const router = new Router()
 
 router.get('/', Controller.findAll)
 router.post('/', Controller.create)
-// router.delete('/:id', Controller.destroy)
+router.post('/delete_selected', Controller.deleteSelected)
 
 export default router.routes()

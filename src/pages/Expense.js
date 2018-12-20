@@ -6,7 +6,7 @@ import Paper from '@material-ui/core/Paper'
 
 import ExpenseTable from './expense/ExpenseTable'
 import ExpenseAddForm from './expense/ExpenseAddForm'
-import { addExpenseItem, deleteExpenseItem } from '../actions/expense'
+import { saveExpenseItem, deleteSelectedItems } from '../actions/expense'
 
 class Expense extends Component {
   state = {
@@ -18,11 +18,12 @@ class Expense extends Component {
   }
 
   handleSubmit = item =>{
-    this.props.addExpenseItem(item)
+    this.props.saveExpenseItem(item)
   }
 
   handleDeletItem = items => {
-    this.props.deleteExpenseItem(items)
+    console.log(items);
+    this.props.deleteSelectedItems(items)
   }
 
   render(){
@@ -60,7 +61,7 @@ class Expense extends Component {
 export default connect(
   null,
   {
-    addExpenseItem,
-    deleteExpenseItem,
+    saveExpenseItem,
+    deleteSelectedItems,
   }
 )(Expense)

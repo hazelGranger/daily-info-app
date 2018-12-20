@@ -2,7 +2,7 @@ import mongoose from 'mongoose'
 
 const ExpenseSchema = new mongoose.Schema(
   {
-    name: { type: String },
+    item: { type: String },
     price: { type: Number },
     type: { type: String },
     date: { type: Date, default: Date.now }

@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 import EnhancedTable from '../../components/EnhancedTable'
+import { fetchExpenseItems } from '../../actions/expense'
 
 const expenseModel = [
   {
@@ -29,6 +30,10 @@ const expenseModel = [
 ]
 
 class ExpenseTable extends Component{
+
+  componentDidMount (){
+    this.props.fetchExpenseItems()
+  }
   render(){
     const { expense, handleAddItem, handleDeletItem } = this.props
     return(
@@ -52,5 +57,5 @@ ExpenseTable.propTypes = {
 
 export default connect(
   state=>state,
-  null
+  { fetchExpenseItems }
 )(ExpenseTable)
