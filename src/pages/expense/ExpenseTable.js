@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 import EnhancedTable from '../../components/EnhancedTable'
-import { addExpenseItem } from '../../model/expense.js'
 
 const expenseModel = [
   {

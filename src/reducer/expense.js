@@ -1,4 +1,9 @@
-// reducer
+import {
+  ADD_EXPENSE_ITEM,
+  DELETE_EXPENSE_ITEM,
+  LOADED_EXPENSE_ITEM,
+  FETCH_EXPENSE_ITEM
+} from '../actions/expense'
 // createData
 let id = 0
 
@@ -20,24 +25,13 @@ const initalState = [
   createData('Books', 10, '2018-11-11', 'learning'),
 ]
 
-// actions
-let ADD_EXPENSE_ITEM = 'ADD_EXPENSE_ITEM'
-let DELETE_EXPENSE_ITEM = 'DELETE_EXPENSE_ITEM'
-
-export const addExpenseItem = (item) => ({
-  type: ADD_EXPENSE_ITEM, payload: { ...item, id: ++id, date: '2018-12-12'}
-})
-
-export const deleteExpenseItem = (items) => ({
-  type: DELETE_EXPENSE_ITEM, payload: items
-})
-
+// reducer
 const expense = (state=initalState, action) => {
   switch (action.type) {
     case ADD_EXPENSE_ITEM:
-      return [...state, action.payload]
+      return [...state, action.expenseItem]
     case DELETE_EXPENSE_ITEM:
-      return state.filter(v=>!action.payload.includes(v.id))
+      return state.filter(v=>!action.ids.includes(v.id))
     default:
       return state
   }

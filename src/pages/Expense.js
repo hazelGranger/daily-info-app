@@ -6,7 +6,7 @@ import Paper from '@material-ui/core/Paper'
 
 import ExpenseTable from './expense/ExpenseTable'
 import ExpenseAddForm from './expense/ExpenseAddForm'
-import { addExpenseItem, deleteExpenseItem } from '../model/expense'
+import { addExpenseItem, deleteExpenseItem } from '../actions/expense'
 
 class Expense extends Component {
   state = {

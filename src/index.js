@@ -9,7 +9,7 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import { MuiThemeProvider } from '@material-ui/core/styles'
 
 import App from './App'
-import reducer from './model/index'
+import reducer from './reducer/index'
 import { theme } from './themes/theme'
 import * as serviceWorker from './serviceWorker'
 
