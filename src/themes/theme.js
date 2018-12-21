@@ -14,7 +14,22 @@ export const theme =  createMuiTheme({
       main: '#277FBB',
       dark: '#1b5882',
       contrastText: '#fff'
-    }
+    },
+    success: {
+      light: '#33abaf',
+      main: '#00979c',
+      dark: '#00696d'
+    },
+    warning: {
+      light: '#fde252',
+      main: '#fddb27',
+      dark: '#b1991b'
+    },
+    error: {
+      light: '#ba5e7f',
+      main: '#a93660',
+      dark: '#762543'
+    },
   },
   typography: {
     useNextVariants: true,
