@@ -58,7 +58,7 @@ class Layout extends Component {
         <main className={classes.content}
           >
             <div className={classes.appBarSpacer} />
-            <Notification variant="info" message="add item successfully" />
+            <Notification />
             { this.props.children }
         </main>
       </div>

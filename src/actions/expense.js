@@ -1,5 +1,5 @@
 import axios from 'axios'
-// action typefaces
+// action types
 export const ADD_EXPENSE_ITEM = 'ADD_EXPENSE_ITEM'
 export const DELETE_EXPENSE_ITEM = 'DELETE_EXPENSE_ITEM'
 export const LOADED_EXPENSE_ITEM = 'LOADED_TODOS'
@@ -27,6 +27,7 @@ export const saveExpenseItem = (expenseItem) => {
   return  async (dispatch) => {
     const res = await axios.post('/expense', expenseItem)
     dispatch(addExpenseItem({...expenseItem, id: res.data._id}))
+    return res.status
   }
 }
 

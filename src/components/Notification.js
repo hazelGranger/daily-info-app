@@ -1,6 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
+import { connect } from 'react-redux'
+
+import {
+  closeNotification,
+  processQueue
+ } from '../actions/notification'
 
 import { withStyles } from '@material-ui/core/styles'
 import Snackbar from '@material-ui/core/Snackbar'
@@ -52,48 +58,20 @@ const styles = theme => ({
 
 class Notification extends React.Component {
 
-  queue = []
-
-  state = {
-    open: true,
-    messageInfo: {}
-  }
-
-  processQueue = () => {
-    if (this.queue.length > 0) {
-      this.setState({
-        messageInfo: this.queue.shift(),
-        open: true
-      })
-    }
-  }
-
-  showNotification = message => () => {
-    this.queue.push({
-      message,
-      key: new Date().getTime()
-    })
-
-    if (this.state.open) {
-      this.setState({ open: false })
-    } else {
-      this.processQueue()
-    }
-  }
-
   handleClose = (event, reason) => {
     if (reason==="clickaway") {
       return
     }
-    this.setState({ open: false })
+    this.props.closeNotification()
   }
 
   handleExited = () => {
-    this.processQueue()
+    this.props.processQueue()
   }
 
   render() {
-    const { classes, variant, message } = this.props
+    const { classes, notification } = this.props
+    const variant = notification.message.type
     const Icon = variantIcon[variant]
     return(
         <Snackbar
@@ -101,8 +79,8 @@ class Notification extends React.Component {
             vertical: 'bottom',
             horizontal: 'right'
           }}
-          open={this.state.open}
-          autoHideDurations={6000}
+          open={notification.open}
+          autoHideDuration={5000}
           onClose={this.handleClose}
           onExited={this.handleExited}
         >
@@ -111,7 +89,7 @@ class Notification extends React.Component {
             message={
               <span id="message-id" className={classes.message}>
                 <Icon className={classNames(classes.icon, classes.iconVariant, classes[variant])} />
-                {message}
+                {notification.message.content}
               </span>
             }
             action={<IconButton
@@ -129,4 +107,10 @@ class Notification extends React.Component {
   }
 }
 
-export default withStyles(styles)(Notification)
+export default connect(
+  state=>state,
+  {
+    closeNotification,
+    processQueue
+  }
+)(withStyles(styles)(Notification))

@@ -7,10 +7,17 @@ import Paper from '@material-ui/core/Paper'
 import ExpenseTable from './expense/ExpenseTable'
 import ExpenseAddForm from './expense/ExpenseAddForm'
 import { saveExpenseItem, deleteSelectedItems } from '../actions/expense'
+import { showNotification, closeNotification } from '../actions/notification'
 
 class Expense extends Component {
   state = {
-    modalOpen: false
+    modalOpen: false,
+    messages: {
+      addSuccess: 'Adding Expense item succeed!',
+      addError: 'Adding Expense item failed!',
+      deleteSuccess: 'Deleting items success!',
+      deleteError: 'Deleting items failed!',
+    }
   }
 
   handleAddItem = () => {
@@ -18,11 +25,21 @@ class Expense extends Component {
   }
 
   handleSubmit = item =>{
-    this.props.saveExpenseItem(item)
+      // this.props.saveExpenseItem(item) is a Promise Object, get value by use .then()
+      this.props.saveExpenseItem(item).then( res => {
+        this.props.showNotification({
+          type: 'success',
+          content: this.state.messages.addSuccess
+        })
+      }, error => {
+        this.props.showNotification({
+          type: 'error',
+          content: this.state.messages.addError
+        })
+      })
   }
 
   handleDeletItem = items => {
-    console.log(items);
     this.props.deleteSelectedItems(items)
   }
 
@@ -63,5 +80,7 @@ export default connect(
   {
     saveExpenseItem,
     deleteSelectedItems,
+    showNotification,
+    closeNotification,
   }
 )(Expense)
