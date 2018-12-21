@@ -5,6 +5,8 @@ import {
   FETCH_EXPENSE_ITEM
 } from '../actions/expense'
 
+import { getYMD } from '../utils/timeFormat'
+
 const initalState = []
 
 // reducer
@@ -15,8 +17,7 @@ const expense = (state=initalState, action) => {
     case LOADED_EXPENSE_ITEM:
       return action.expenseItems.map(v => {
         const {_id, date: date, ...item } = v
-        const createdDate = new Date(date)
-        return {...item, id: _id, date: `${createdDate.getFullYear()}-${createdDate.getMonth()+1}-${createdDate.getDate()}`}
+        return {...item, id: _id, date: getYMD(new Date(date)) }
       })
     case DELETE_EXPENSE_ITEM:
       return state.filter(v=>!action.ids.includes(v.id))

@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { getYMD } from '../utils/timeFormat'
 // action types
 export const ADD_EXPENSE_ITEM = 'ADD_EXPENSE_ITEM'
 export const DELETE_EXPENSE_ITEM = 'DELETE_EXPENSE_ITEM'
@@ -26,7 +27,9 @@ export const fetchExpenseItem = () => (
 export const saveExpenseItem = (expenseItem) => {
   return  async (dispatch) => {
     const res = await axios.post('/expense', expenseItem)
-    dispatch(addExpenseItem({...expenseItem, id: res.data._id}))
+    dispatch(addExpenseItem(
+      {...expenseItem, id: res.data._id, date: getYMD(new Date(res.data.date))}
+    ))
     return res.status
   }
 }
