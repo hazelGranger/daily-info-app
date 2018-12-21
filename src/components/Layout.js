@@ -7,6 +7,7 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import { routes } from '../routes/routes'
 import Header from './Header'
 import Navbar from './Navbar'
+import Notification from './Notification'
 
 const styles = theme => ({
   content: {
@@ -57,6 +58,7 @@ class Layout extends Component {
         <main className={classes.content}
           >
             <div className={classes.appBarSpacer} />
+            <Notification />
             { this.props.children }
         </main>
       </div>
