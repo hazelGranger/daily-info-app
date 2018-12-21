@@ -71,7 +71,7 @@ class Notification extends React.Component {
 
   render() {
     const { classes, notification } = this.props
-    const variant = notification.message.type
+    const variant = notification.message.type || 'success'
     const Icon = variantIcon[variant]
     return(
         <Snackbar

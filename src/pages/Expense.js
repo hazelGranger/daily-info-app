@@ -25,7 +25,7 @@ class Expense extends Component {
   }
 
   handleSubmit = item =>{
-      // this.props.saveExpenseItem(item) is a Promise Object, get value by use .then()
+      // Promise Object ---> this.props.saveExpenseItem(item), get value by use .then()
       this.props.saveExpenseItem(item).then( res => {
         this.props.showNotification({
           type: 'success',
@@ -40,7 +40,18 @@ class Expense extends Component {
   }
 
   handleDeletItem = items => {
-    this.props.deleteSelectedItems(items)
+    // Promise Object
+    this.props.deleteSelectedItems(items).then( res => {
+      this.props.showNotification({
+        type: 'success',
+        content: this.state.messages.deleteSuccess
+      })
+    }, error => {
+      this.props.showNotification({
+        type: 'error',
+        content: this.state.messages.deleteError
+      })
+    })
   }
 
   render(){
