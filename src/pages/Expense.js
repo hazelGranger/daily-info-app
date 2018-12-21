@@ -15,7 +15,7 @@ class Expense extends Component {
     messages: {
       addSuccess: 'Adding Expense item succeed!',
       addError: 'Adding Expense item failed!',
-      deleteSuccess: 'Deleting items success!',
+      deleteSuccess: (num)=>`Deleting ${num} items succeed!`,
       deleteError: 'Deleting items failed!',
     }
   }
@@ -26,7 +26,7 @@ class Expense extends Component {
 
   handleSubmit = item =>{
       // Promise Object ---> this.props.saveExpenseItem(item), get value by use .then()
-      this.props.saveExpenseItem(item).then( res => {
+      this.props.saveExpenseItem(item).then( () => {
         this.props.showNotification({
           type: 'success',
           content: this.state.messages.addSuccess
@@ -41,10 +41,10 @@ class Expense extends Component {
 
   handleDeletItem = items => {
     // Promise Object
-    this.props.deleteSelectedItems(items).then( res => {
+    this.props.deleteSelectedItems(items).then( data => {
       this.props.showNotification({
         type: 'success',
-        content: this.state.messages.deleteSuccess
+        content: this.state.messages.deleteSuccess(data.n)
       })
     }, error => {
       this.props.showNotification({

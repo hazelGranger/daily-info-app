@@ -45,6 +45,7 @@ export const deleteSelectedItems = (selectedIds) => {
   return async (dispatch) => {
     const res = await axios.post('/expense/delete_selected', selectedIds)
     dispatch(deleteExpenseItem(selectedIds))
-    return res.status
+    console.log(res,'res')
+    return res.data
   }
 }
