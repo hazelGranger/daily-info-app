@@ -62,10 +62,6 @@ class ExpenseAddForm extends Component{
     })
   }
 
-  // handleSubmit = () =>{
-  //   this.props.handleSubmit(this.state)
-  // }
-
   render(){
     const { classes, handleSubmit } = this.props
     return(
@@ -96,7 +92,7 @@ class ExpenseAddForm extends Component{
               id="price"
               name="price"
               label="Price"
-              onChange={event => this.handleInputChange('price', event.target.value)}
+              onChange={event => this.handleInputChange('price', parseInt(event.target.value))}
             />
           </Grid>
           <Grid item xs={12} >
