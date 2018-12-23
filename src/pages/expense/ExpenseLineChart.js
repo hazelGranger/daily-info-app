@@ -8,26 +8,25 @@ class ExpenseLineChart extends React.Component {
   render(){
 
     const data = this.props.expense.reduce((ac, v) => {
-      const obj = ac.find(d => d.name === v.date)
-      if (obj) {
-
-        if (!obj[v.type]) {
-          obj[v.type] = 0
-        }
-        obj[v.type] += v.price
-
-        if (!obj['sum']) {
-          obj['sum'] = 0
-        }
-        obj['sum'] += v.price
-        // also  can use this expression, but I think it is less semantic 
-        //obj['sum'] = obj['sum'] ? (obj['sum'] + v.price) : (0 + v.price)
-      } else {
-        ac.push({name: v.date})
+      let obj = ac.find(d => d.name === v.date)
+      if (!obj) {
+        obj = {name: v.date}
+        ac.push(obj)
       }
+      if (!obj[v.type]) {
+        obj[v.type] = 0
+      }
+      obj[v.type] += v.price
+
+      if (!obj['sum']) {
+        obj['sum'] = 0
+      }
+      obj['sum'] += v.price
+      // also  can use this expression, but I think it is less semantic
+      //obj['sum'] = obj['sum'] ? (obj['sum'] + v.price) : (0 + v.price)
       return ac
     }, [])
-
+    console.log(data)
     const yKey = [
       {keyName: 'food'},
       {keyName: 'living'},

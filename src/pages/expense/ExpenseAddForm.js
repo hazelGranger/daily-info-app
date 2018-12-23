@@ -92,7 +92,7 @@ class ExpenseAddForm extends Component{
               id="price"
               name="price"
               label="Price"
-              onChange={event => this.handleInputChange('price', event.target.value+0)}
+              onChange={event => this.handleInputChange('price', event.target.value*1)}
             />
           </Grid>
           <Grid item xs={12} >
