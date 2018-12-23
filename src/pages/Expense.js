@@ -7,6 +7,7 @@ import Paper from '@material-ui/core/Paper'
 import ExpenseTable from './expense/ExpenseTable'
 import ExpenseAddForm from './expense/ExpenseAddForm'
 import ExpenseLineChart from './expense/ExpenseLineChart'
+import ExpensePieChart from './expense/ExpensePieChart'
 import { saveExpenseItem, deleteSelectedItems } from '../actions/expense'
 import { showNotification, closeNotification } from '../actions/notification'
 
@@ -78,7 +79,7 @@ class Expense extends Component {
           </Grid>
           <Grid item xs={5}>
             <Paper>
-              pie chart
+              <ExpensePieChart />
             </Paper>
           </Grid>
         </Grid>

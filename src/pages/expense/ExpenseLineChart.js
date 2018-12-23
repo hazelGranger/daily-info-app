@@ -26,7 +26,6 @@ class ExpenseLineChart extends React.Component {
       //obj['sum'] = obj['sum'] ? (obj['sum'] + v.price) : (0 + v.price)
       return ac
     }, [])
-    console.log(data)
     const yKey = [
       {keyName: 'food'},
       {keyName: 'living'},

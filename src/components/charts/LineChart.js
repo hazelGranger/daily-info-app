@@ -30,7 +30,7 @@ class LineChart extends React.Component {
               <Line key={i}
                 type={v.type ? v.type : "monotone"}
                 dataKey={v.keyName}
-                stroke={v.color ? v.color : chartColor[i]}
+                stroke={v.color ? v.color : chartColor[i%chartColor.length]}
               />
             ))
           }
