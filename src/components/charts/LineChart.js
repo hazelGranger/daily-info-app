@@ -9,12 +9,14 @@ import {
   Tooltip,
   Legend
 } from 'recharts'
-import { withStyles } from '@material-ui/core/styles'
+import { withTheme } from '@material-ui/core/styles'
+
 
 class LineChart extends React.Component {
 
   render(){
-    const { height, data, xKey, yKey } = this.props
+    const { height, data, xKey, yKey, theme } = this.props
+    const chartColor = theme.components.chart.color
     return(
       <ResponsiveContainer width="98%" height={height}>
         <MuiLineChart data={data}>
@@ -28,7 +30,7 @@ class LineChart extends React.Component {
               <Line key={i}
                 type={v.type ? v.type : "monotone"}
                 dataKey={v.keyName}
-                stroke={v.color ? v.color : '#ff00ff'}
+                stroke={v.color ? v.color : chartColor[i]}
               />
             ))
           }
@@ -38,4 +40,4 @@ class LineChart extends React.Component {
   }
 }
 
-export default LineChart
+export default withTheme()(LineChart)
