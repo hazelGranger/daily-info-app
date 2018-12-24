@@ -1,5 +1,6 @@
 import React from 'react'
 import {
+  ResponsiveContainer,
   PieChart as MuiPieChart,
   Pie,
   Sector,
@@ -57,37 +58,35 @@ class PieChart extends React.Component {
         />
         <path d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`} stroke={fill} fill="none"/>
         <circle cx={ex} cy={ey} r={2} fill={fill} stroke="none"/>
-        <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} textAnchor={textAnchor} fill="#333">{`PV ${value}`}</text>
+        <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} textAnchor={textAnchor} fill="#333">{`$ ${value}`}</text>
         <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} dy={18} textAnchor={textAnchor} fill="#999">
-          {`(Rate ${(percent * 100).toFixed(2)}%)`}
+          {`${(percent * 100).toFixed(1)}%`}
         </text>
       </g>
     )
   }
 
   render(){
-    const data = [
-      {name: 'Group A', value: 400},
-      {name: 'Group B', value: 300},
-      {name: 'Group C', value: 300},
-      {name: 'Group D', value: 200}
-    ]
+    const { data, width, height } = this.props
+    console.log(width);
     return(
-      <MuiPieChart width={500} height={400} >
-        <Pie
-          activeIndex={this.state.activeIndex}
-          activeShape={this.renderActiveShape}
-          data={data}
-          dataKey="value"
-          cx={250}
-          cy={200}
-          innerRadius={40}
-          outerRadius={70}
-          fill="#ff6f61"
-          onMouseEnter={this.onPieEnter}
-        >
-        </Pie>
-      </MuiPieChart>
+      <ResponsiveContainer width={width} height={height}>
+        <MuiPieChart >
+          <Pie
+            activeIndex={this.state.activeIndex}
+            activeShape={this.renderActiveShape}
+            data={data}
+            dataKey="value"
+            cx={width/2}
+            cy={height/2}
+            innerRadius={60}
+            outerRadius={90}
+            fill="#ff6f61"
+            onMouseEnter={this.onPieEnter}
+          >
+          </Pie>
+        </MuiPieChart>
+      </ResponsiveContainer>
     )
   }
 }

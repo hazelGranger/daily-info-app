@@ -5,8 +5,26 @@ import PieChart from '../../components/charts/PieChart'
 
 class ExpensePieChart extends React.Component {
   render(){
+
+    const data = this.props.expense.reduce((ac, v) => {
+      let obj = ac.find( group => group.name === v.type)
+      if (!obj) {
+        obj = {name: v.type}
+        ac.push(obj)
+      }
+      if (!obj.value) {
+        obj.value = 0
+      }
+      obj.value += v.price
+      return ac
+    }, [])
+
     return(
-      <PieChart />
+      <PieChart
+        data={data}
+        width={420}
+        height={400}
+      />
     )
   }
 }

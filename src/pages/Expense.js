@@ -11,6 +11,16 @@ import ExpensePieChart from './expense/ExpensePieChart'
 import { saveExpenseItem, deleteSelectedItems } from '../actions/expense'
 import { showNotification, closeNotification } from '../actions/notification'
 
+import { withStyles } from '@material-ui/core/styles'
+
+const styles = theme => ({
+  pieChartPaper: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
+})
+
 class Expense extends Component {
   state = {
     modalOpen: false,
@@ -72,13 +82,13 @@ class Expense extends Component {
                />
             </Paper>
           </Grid>
-          <Grid item xs={7}>
+          <Grid item xs={12} lg={7}>
             <Paper>
               <ExpenseLineChart />
             </Paper>
           </Grid>
-          <Grid item xs={5}>
-            <Paper>
+          <Grid item xs={12} lg={5}>
+            <Paper className={this.props.classes.pieChartPaper}>
               <ExpensePieChart />
             </Paper>
           </Grid>
@@ -88,7 +98,8 @@ class Expense extends Component {
   }
 }
 
-export default connect(
+export default withStyles(styles)(
+  connect(
   null,
   {
     saveExpenseItem,
@@ -96,4 +107,4 @@ export default connect(
     showNotification,
     closeNotification,
   }
-)(Expense)
+)(Expense))
