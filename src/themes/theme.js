@@ -40,7 +40,7 @@ export const theme =  createMuiTheme({
       contentPadding: '24px',
     },
     chart: {
-      color: ['#b24d43', '#1b5882', '#00696d', '#b1991b', '#762543', '#7f619b', '#81894e', '#263056']
+      color: ['#b24d43', '#1b5882', '#00696d', '#7f619b', '#b1991b', '#762543',  '#81894e', '#263056']
     }
   }
 })

@@ -67,8 +67,8 @@ class PieChart extends React.Component {
   }
 
   render(){
-    const { data, width, height } = this.props
-    console.log(width);
+    const { data, width, height, theme } = this.props
+    const chartColor = theme.components.chart.color
     return(
       <ResponsiveContainer width={width} height={height}>
         <MuiPieChart >
@@ -84,6 +84,11 @@ class PieChart extends React.Component {
             fill="#ff6f61"
             onMouseEnter={this.onPieEnter}
           >
+            {
+              data.map((v, i) =>
+                <Cell fill={chartColor[i%chartColor.length]} />
+              )
+            }
           </Pie>
         </MuiPieChart>
       </ResponsiveContainer>
