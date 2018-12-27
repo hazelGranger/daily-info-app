@@ -8,6 +8,8 @@ import {
 } from 'recharts'
 import { withTheme } from '@material-ui/core/styles'
 
+import ExpenseTypeIcon from '../../pages/expense/ExpenseTypeIcon'
+
 class PieChart extends React.Component {
   state = {
     activeIndex: 0
@@ -23,6 +25,7 @@ class PieChart extends React.Component {
     const RADIAN = Math.PI / 180;
     const { cx, cy, midAngle, innerRadius, outerRadius, startAngle, endAngle,
       fill, payload, percent, value } = props;
+    const { renderIcon } = this.props
     const sin = Math.sin(-RADIAN * midAngle);
     const cos = Math.cos(-RADIAN * midAngle);
     const sx = cx + (outerRadius + 10) * cos;
@@ -32,12 +35,28 @@ class PieChart extends React.Component {
     const ex = mx + (cos >= 0 ? 1 : -1) * 22;
     const ey = my;
     const textAnchor = cos >= 0 ? 'start' : 'end';
-
     return (
       <g>
-        <text x={cx} y={cy} dy={8} textAnchor="middle" fill={fill}>
-          {payload.name}
-        </text>
+        {
+          renderIcon ? (
+            <text x={cx} y={cy} dy={16} textAnchor="middle" fill={fill}>
+              {payload.name}
+            </text>
+          ) : (
+            <text x={cx} y={cy} dy={8} textAnchor="middle" fill={fill}>
+              {payload.name}
+            </text>
+          )
+        }
+        {
+          renderIcon ? (
+            <foreignObject width="20" height="20" x={cx-10} y={cy-24} >
+              {renderIcon(payload.name, fill)}
+            </foreignObject>
+          ) : (
+            null
+          )
+        }
         <Sector
           cx={cx}
           cy={cy}
@@ -70,28 +89,26 @@ class PieChart extends React.Component {
     const { data, width, height, theme } = this.props
     const chartColor = theme.components.chart.color
     return(
-      <ResponsiveContainer width={width} height={height}>
-        <MuiPieChart >
-          <Pie
-            activeIndex={this.state.activeIndex}
-            activeShape={this.renderActiveShape}
-            data={data}
-            dataKey="value"
-            cx={width/2}
-            cy={height/2}
-            innerRadius={60}
-            outerRadius={90}
-            fill="#ff6f61"
-            onMouseEnter={this.onPieEnter}
-          >
-            {
-              data.map((v, i) =>
-                <Cell key={i} fill={chartColor[i%chartColor.length]} />
-              )
-            }
-          </Pie>
-        </MuiPieChart>
-      </ResponsiveContainer>
+      <MuiPieChart width={width} height={height} >
+        <Pie
+          activeIndex={this.state.activeIndex}
+          activeShape={this.renderActiveShape}
+          data={data}
+          dataKey="value"
+          cx={width/2}
+          cy={height/2}
+          innerRadius={60}
+          outerRadius={90}
+          fill="#ff6f61"
+          onMouseEnter={this.onPieEnter}
+        >
+          {
+            data.map((v, i) =>
+              <Cell key={i} fill={chartColor[i%chartColor.length]} />
+            )
+          }
+        </Pie>
+      </MuiPieChart>
     )
   }
 }
