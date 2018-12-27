@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 
 import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
+import Typography from '@material-ui/core/Typography'
 
 import ExpenseTable from './expense/ExpenseTable'
 import ExpenseAddForm from './expense/ExpenseAddForm'
@@ -12,13 +13,19 @@ import { saveExpenseItem, deleteSelectedItems } from '../actions/expense'
 import { showNotification, closeNotification } from '../actions/notification'
 
 import { withStyles } from '@material-ui/core/styles'
+import classNames from 'classnames'
 
 const styles = theme => ({
-  pieChartPaper: {
+  paper: {
+    ...theme.mixins.gutters(),
+    paddingTop: theme.spacing.unit * 2,
+    paddingBottom: theme.spacing.unit * 2
+  },
+  pieChartContainer: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center'
-  }
+  },
 })
 
 class Expense extends Component {
@@ -67,6 +74,7 @@ class Expense extends Component {
   }
 
   render(){
+    const { classes } = this.props
     return(
       <div>
         <Grid container spacing={24}>
@@ -83,13 +91,17 @@ class Expense extends Component {
             </Paper>
           </Grid>
           <Grid item xs={12} lg={7}>
-            <Paper>
+            <Paper className={classes.paper}>
+              <Typography variant="h6" gutterBottom>Time-Expense Line Chart</Typography>
               <ExpenseLineChart />
             </Paper>
           </Grid>
           <Grid item xs={12} lg={5}>
-            <Paper className={this.props.classes.pieChartPaper}>
-              <ExpensePieChart />
+            <Paper className={classes.paper}>
+              <Typography variant="h6" gutterBottom>Type-Expense Pie Chart</Typography>
+              <div className={classes.pieChartContainer}>
+                <ExpensePieChart />
+              </div>
             </Paper>
           </Grid>
         </Grid>

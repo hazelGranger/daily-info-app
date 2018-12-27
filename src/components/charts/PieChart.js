@@ -86,7 +86,7 @@ class PieChart extends React.Component {
           >
             {
               data.map((v, i) =>
-                <Cell fill={chartColor[i%chartColor.length]} />
+                <Cell key={i} fill={chartColor[i%chartColor.length]} />
               )
             }
           </Pie>
