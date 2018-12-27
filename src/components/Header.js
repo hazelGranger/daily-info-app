@@ -10,8 +10,6 @@ import Badge from '@material-ui/core/Badge'
 import MenuIcon from '@material-ui/icons/Menu'
 import NotificationsIcon from '@material-ui/icons/Notifications'
 
-const drawerWidth = 240
-
 const styles = theme => ({
   toolbar: {
     paddingRight: 24,
@@ -24,8 +22,8 @@ const styles = theme => ({
     }),
   },
   appBarShift: {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
+    marginLeft: theme.components.drawer.width,
+    width: `calc(100% - ${theme.components.drawer.width}px)`,
     transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
@@ -43,51 +41,44 @@ const styles = theme => ({
   }
 })
 
-class Header extends React.Component {
-
-  // handleDrawerOpen = () => {
-  //   this.props.handleDrawerOpen()
-  // }
-
-  render(){
-    const { classes } = this.props
-    return(
-      <AppBar
-        position="absolute"
-        className={classNames(classes.appBar, this.props.drawerOpen && classes.appBarShift)}
+const Header = (props) => {
+  const { classes, title, drawerOpen, handleDrawerOpen } = props
+  return(
+    <AppBar
+      position="absolute"
+      className={classNames(classes.appBar, drawerOpen && classes.appBarShift)}
+      >
+      <Toolbar disableGutters={!drawerOpen}
+        className={classes.toolbar}
         >
-        <Toolbar disableGutters={!this.props.drawerOpen}
-          className={classes.toolbar}
-          >
-          <IconButton
-            color="inherit"
-            aria-label="Open drawer"
-            onClick={this.props.handleDrawerOpen}
-            className={classNames(
-              classes.menuButton,
-              this.props.drawerOpen && classes.menuButtonHidden,
-            )}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography
-            component="h1"
-            variant="h6"
-            color="inherit"
-            noWrap
-            className={classes.title}
-          >
-            {this.props.title}
-          </Typography>
-          <IconButton color="inherit">
-            <Badge badgeContent={1} color="secondary">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
-        </Toolbar>
-      </AppBar>
-    )
-  }
+        <IconButton
+          color="inherit"
+          aria-label="Open drawer"
+          onClick={handleDrawerOpen}
+          className={classNames(
+            classes.menuButton,
+            drawerOpen && classes.menuButtonHidden,
+          )}
+        >
+          <MenuIcon />
+        </IconButton>
+        <Typography
+          component="h1"
+          variant="h6"
+          color="inherit"
+          noWrap
+          className={classes.title}
+        >
+          {title}
+        </Typography>
+        <IconButton color="inherit">
+          <Badge badgeContent={1} color="secondary">
+            <NotificationsIcon />
+          </Badge>
+        </IconButton>
+      </Toolbar>
+    </AppBar>
+  )
 }
 
 export default withStyles(styles)(Header)

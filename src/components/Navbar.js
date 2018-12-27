@@ -18,13 +18,11 @@ import 'typeface-shrikhand'
 
 import { routes } from '../routes/routes'
 
-const drawerWidth = 240
-
 const styles = theme => ({
   drawerPaper: {
     position: 'relative',
     whiteSpace: 'nowrap',
-    width: drawerWidth,
+    width: theme.components.drawer.width,
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
@@ -64,45 +62,43 @@ const styles = theme => ({
   }
 })
 
-class Navbar extends React.Component {
-  render(){
-    const { classes } = this.props
-    return(
-      <Drawer
-        variant="permanent"
-        open={this.props.drawerOpen}
-        classes={{
-          paper: classNames(classes.drawerPaper, !this.props.drawerOpen && classes.drawerPaperClose)
-        }}
-      >
-        <div className={classes.toolbarIcon}>
-          <IconButton onClick={this.props.handleDrawerClose}>
-            <ChevronLeftIcon />
-          </IconButton>
-            <Typography className={classes.logo}>
-              Da
-              <InfoIcon />
-              ly
-            </Typography>
-        </div>
-        <Divider />
-        <List>
-          {
-            routes.map(r => r.name !== 'home' ? (
-              <Link to={r.path} key={r.name} className={classes.navLink}>
-                <ListItem  button>
-                  <ListItemIcon>
-                    { r.icon }
-                  </ListItemIcon>
-                  <ListItemText primary={r.title} />
-                </ListItem>
-              </Link>
-            ) : null)
-          }
-        </List>
-      </Drawer>
-    )
-  }
+const Navbar = (props) => {
+  const { classes, drawerOpen, handleDrawerClose } = props
+  return(
+    <Drawer
+      variant="permanent"
+      open={drawerOpen}
+      classes={{
+        paper: classNames(classes.drawerPaper, !drawerOpen && classes.drawerPaperClose)
+      }}
+    >
+      <div className={classes.toolbarIcon}>
+        <IconButton onClick={handleDrawerClose}>
+          <ChevronLeftIcon />
+        </IconButton>
+          <Typography className={classes.logo}>
+            Da
+            <InfoIcon />
+            ly
+          </Typography>
+      </div>
+      <Divider />
+      <List>
+        {
+          routes.map(r => r.name !== 'home' ? (
+            <Link to={r.path} key={r.name} className={classes.navLink}>
+              <ListItem  button>
+                <ListItemIcon>
+                  { r.icon }
+                </ListItemIcon>
+                <ListItemText primary={r.title} />
+              </ListItem>
+            </Link>
+          ) : null)
+        }
+      </List>
+    </Drawer>
+  )
 }
 
 export default withStyles(styles)(Navbar)

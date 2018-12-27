@@ -41,6 +41,9 @@ export const theme =  createMuiTheme({
     },
     chart: {
       color: ['#b24d43', '#1b5882', '#00696d', '#7f619b', '#b1991b', '#762543',  '#81894e', '#263056']
+    },
+    drawer: {
+      width: 240
     }
   }
 })
