@@ -12,14 +12,9 @@ import FormLabel from '@material-ui/core/FormLabel'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup'
-import FoodIcon from '@material-ui/icons/Fastfood'
-import HouseIcon from '@material-ui/icons/Home'
-import BusIcon from '@material-ui/icons/DirectionsBus'
-import LearningIcon from '@material-ui/icons/LibraryBooks'
-import ClassIcon from '@material-ui/icons/Class'
-
 
 import Modal from '../../components/Modal'
+import ExpenseTypeIcon from './ExpenseTypeIcon'
 
 const styles = theme => ({
   formContainer: {
@@ -109,7 +104,7 @@ class ExpenseAddForm extends Component{
                 control={<Radio color="primary" />}
                 label={<Typography className={classNames(classes.radioLabel,
                   this.state.type==='food' && classes.radioLabelActive)}>
-                  <FoodIcon className={classes.radioIcon} />Food</Typography>}
+                  <ExpenseTypeIcon type="food" className={classes.radioIcon} />Food</Typography>}
                 labelPlacement="bottom"
               />
               <FormControlLabel
@@ -117,7 +112,7 @@ class ExpenseAddForm extends Component{
                 control={<Radio color="primary" />}
                 label={<Typography className={classNames(classes.radioLabel,
                   this.state.type==='living' && classes.radioLabelActive)}>
-                  <HouseIcon className={classes.radioIcon} />Living</Typography>}
+                  <ExpenseTypeIcon type="living" className={classes.radioIcon} />Living</Typography>}
                 labelPlacement="bottom"
               />
               <FormControlLabel
@@ -125,7 +120,7 @@ class ExpenseAddForm extends Component{
                 control={<Radio color="primary" />}
                 label={<Typography className={classNames(classes.radioLabel,
                   this.state.type==='transportation' && classes.radioLabelActive)}>
-                  <BusIcon className={classes.radioIcon} />Transport</Typography>}
+                  <ExpenseTypeIcon type="transportation" className={classes.radioIcon} />Transport</Typography>}
                 labelPlacement="bottom"
               />
               <FormControlLabel
@@ -133,7 +128,7 @@ class ExpenseAddForm extends Component{
                 control={<Radio color="primary" />}
                 label={<Typography className={classNames(classes.radioLabel,
                   this.state.type==='learning' && classes.radioLabelActive)}>
-                  <LearningIcon className={classes.radioIcon} />Learning</Typography>}
+                  <ExpenseTypeIcon type="learning" className={classes.radioIcon} />Learning</Typography>}
                 labelPlacement="bottom"
               />
               <FormControlLabel
@@ -141,7 +136,7 @@ class ExpenseAddForm extends Component{
                 control={<Radio color="primary" />}
                 label={<Typography className={classNames(classes.radioLabel,
                   this.state.type==='others' && classes.radioLabelActive)}>
-                  <ClassIcon className={classes.radioIcon} />Others</Typography>}
+                  <ExpenseTypeIcon type="others" className={classes.radioIcon} />Others</Typography>}
                 labelPlacement="bottom"
               />
             </RadioGroup>

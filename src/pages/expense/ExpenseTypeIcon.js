@@ -14,10 +14,10 @@ const typeIcon = {
 }
 
 const ExpenseTypeIcon = (props) => {
-  const { type, color } = props
+  const { type, color, className } = props
   const Icon = type ? typeIcon[type] : typeIcon['others']
   return(
-    <Icon style={{color: color ? color :'inherit'}} ></Icon>
+    <Icon style={{color: color ? color :'inherit'}} className={className}></Icon>
   )
 }
 

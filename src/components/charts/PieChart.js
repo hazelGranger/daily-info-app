@@ -8,8 +8,6 @@ import {
 } from 'recharts'
 import { withTheme } from '@material-ui/core/styles'
 
-import ExpenseTypeIcon from '../../pages/expense/ExpenseTypeIcon'
-
 class PieChart extends React.Component {
   state = {
     activeIndex: 0
