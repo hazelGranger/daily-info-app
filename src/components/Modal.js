@@ -60,7 +60,7 @@ class Modal extends Component {
   }
 
   render(){
-    const { classes, title, children, open, handleSubmit, footer } = this.props
+    const { classes, title, children, footer } = this.props
     return(
       <MuiModal
         aria-labelledby="simple-modal-title"

@@ -1,8 +1,7 @@
 import {
   ADD_EXPENSE_ITEM,
   DELETE_EXPENSE_ITEM,
-  LOADED_EXPENSE_ITEM,
-  FETCH_EXPENSE_ITEM
+  LOADED_EXPENSE_ITEM
 } from '../actions/expense'
 
 import { getYMD } from '../utils/timeFormat'
@@ -16,7 +15,7 @@ const expense = (state=initalState, action) => {
       return [...state, action.expenseItem]
     case LOADED_EXPENSE_ITEM:
       return action.expenseItems.map(v => {
-        const {_id, date: date, ...item } = v
+        const {_id, date, ...item } = v
         return {...item, id: _id, date: getYMD(new Date(date)) }
       })
     case DELETE_EXPENSE_ITEM:

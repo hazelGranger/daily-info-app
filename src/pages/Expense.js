@@ -13,7 +13,6 @@ import { saveExpenseItem, deleteSelectedItems } from '../actions/expense'
 import { showNotification, closeNotification } from '../actions/notification'
 
 import { withStyles } from '@material-ui/core/styles'
-import classNames from 'classnames'
 
 const styles = theme => ({
   paper: {

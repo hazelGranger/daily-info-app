@@ -11,7 +11,6 @@ import TableRow from '@material-ui/core/TableRow'
 import TableSortLabel from '@material-ui/core/TableSortLabel'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
-import Paper from '@material-ui/core/Paper'
 import Checkbox from '@material-ui/core/Checkbox'
 import IconButton from '@material-ui/core/IconButton'
 import Tooltip from '@material-ui/core/Tooltip'
@@ -287,7 +286,7 @@ class EnhancedTable extends React.Component {
       <React.Fragment>
         <EnhancedTableToolbar
           numSelected={selected.length}
-          title={this.props.title}
+          title={title}
           hasAddItem={hasAddItem}
           hasFilter={hasFilter}
           addItem={handleAddItem}
@@ -325,7 +324,7 @@ class EnhancedTable extends React.Component {
                       {
                         model.map((m, index)=>{
                           return index===0 ? (
-                            <TableCell key={index} component="th" scope="row" padding="none"
+                            <TableCell key={index} component="th" scope="row"
                               numeric={model[index].numeric}
                               padding={model[index].disablePadding ? 'none' : 'default'}
                             >

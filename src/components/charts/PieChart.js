@@ -1,6 +1,5 @@
 import React from 'react'
 import {
-  ResponsiveContainer,
   PieChart as MuiPieChart,
   Pie,
   Sector,

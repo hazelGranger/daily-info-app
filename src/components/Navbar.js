@@ -12,7 +12,6 @@ import ListItemText from '@material-ui/core/ListItemText'
 import Typography from '@material-ui/core/Typography'
 import IconButton from '@material-ui/core/IconButton'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
-import DashboardIcon from '@material-ui/icons/Dashboard'
 import InfoIcon from '@material-ui/icons/Info'
 import 'typeface-shrikhand'
 
