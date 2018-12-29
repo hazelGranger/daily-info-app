@@ -1,12 +1,15 @@
+import "@babel/polyfill"
 import Koa from 'koa'
 import Router from 'koa-router'
 import Logger from 'koa-logger'
 import BodyParser from 'koa-bodyparser'
 import Helmet from 'koa-helmet'
 import respond from 'koa-respond'
+import Static from 'koa-static'
 import mongoose from 'mongoose'
 import { routes } from './routes'
 
+import fs  from 'fs'
 
 const app = new Koa()
 const router = new Router()
@@ -25,6 +28,8 @@ app.use(BodyParser({
 routes(router)
 app.use(router.routes())
 app.use(router.allowedMethods())
+
+app.use(Static('./build'))
 // const main = ctx => {
 //   ctx.response.body = 'Hello World'
 // }
