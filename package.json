@@ -46,7 +46,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "serve": "nodemon ./server/index.js --exec babel-node ",
-    "build-server": "babel -d ./buildserver ./server -s"
+    "build-server": "rm -rf ./buildserver && babel -d ./buildserver ./server -s",
+    "build-all" : "npm run build-server && npm run build && mv ./build ./buildserver/build",
+    "run-build": "node ./buildserver/index.js"
   },
   "eslintConfig": {
     "extends": "react-app"

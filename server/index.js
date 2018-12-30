@@ -4,12 +4,11 @@ import Router from 'koa-router'
 import Logger from 'koa-logger'
 import BodyParser from 'koa-bodyparser'
 import Helmet from 'koa-helmet'
-import respond from 'koa-respond'
+// import respond from 'koa-respond'
 import Static from 'koa-static'
 import mongoose from 'mongoose'
 import { routes } from './routes'
-
-import fs  from 'fs'
+import dotenv from 'dotenv'
 
 const app = new Koa()
 const router = new Router()
@@ -28,13 +27,19 @@ app.use(BodyParser({
 routes(router)
 app.use(router.routes())
 app.use(router.allowedMethods())
-
 app.use(Static('./build'))
-// const main = ctx => {
-//   ctx.response.body = 'Hello World'
-// }
+
+dotenv.config()
+console.log(process.env.NODE_ENV)
+
 const port = 9093
-const db_url = 'mongodb://localhost:27017/daily-info'
+let db_url = 'mongodb://localhost:27017/daily-info'
+
+if (process.env.NODE_ENV === 'production') {
+  db_url = 'mongodb://<name>:<password>@ds145584.mlab.com:45584/dailyinfo'
+}
+
+//
 
 mongoose.connect(db_url)
 
