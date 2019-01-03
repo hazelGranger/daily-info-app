@@ -36,7 +36,7 @@ const port = 9093
 let db_url = 'mongodb://localhost:27017/daily-info'
 
 if (process.env.NODE_ENV === 'production') {
-  db_url = 'mongodb://<name>:<password>@ds145584.mlab.com:45584/dailyinfo'
+  db_url = ''
 }
 
 //

@@ -6,6 +6,7 @@
     "@material-ui/core": "^3.6.1",
     "@material-ui/icons": "^3.0.1",
     "axios": "^0.18.0",
+    "dotenv": "^6.2.0",
     "koa": "^2.6.2",
     "koa-body": "^4.0.4",
     "koa-bodyparser": "^4.2.1",
@@ -47,7 +48,7 @@
     "eject": "react-scripts eject",
     "serve": "nodemon ./server/index.js --exec babel-node ",
     "build-server": "rm -rf ./buildserver && babel -d ./buildserver ./server -s",
-    "build-all" : "npm run build-server && npm run build && mv ./build ./buildserver/build",
+    "build-all": "npm run build-server && npm run build && mv ./build ./buildserver/build",
     "run-build": "node ./buildserver/index.js"
   },
   "eslintConfig": {
