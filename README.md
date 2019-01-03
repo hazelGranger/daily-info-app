@@ -31,7 +31,7 @@ All pages are under 'pages', the capitalized Component is the structure of the p
 The routers are under the 'routes', just a map for React-router to find the correct page component for the url.
 Since this app use Redux as a state management lib, actions and reducers can be found in the folder of the same name.
 Other folders, 'themes' is for the basic seetings of Material-UI; 'utils' is for all helper functions.
-
+```
 ├── App.js
 ├── App.test.js
 ├── actions
@@ -70,6 +70,7 @@ Other folders, 'themes' is for the basic seetings of Material-UI; 'utils' is for
 │   └── theme.js
 └── utils
     └── timeFormat.js
+```
 
 
 ### Structure of Back-end Parts
@@ -82,7 +83,7 @@ Folder 'model' is for all data structure stored in MongoDB
 
 Folder 'controllers' includes all the actions toward database, they are all exported as functions for api routes files.
 
-
+```
 ├── controllers
 │   └── expense.js
 ├── index.js
@@ -91,3 +92,4 @@ Folder 'controllers' includes all the actions toward database, they are all expo
 └── routes
     ├── expense.js
     └── index.js
+```
