@@ -48,7 +48,8 @@
     "eject": "react-scripts eject",
     "serve": "nodemon ./server/index.js --exec babel-node ",
     "build-server": "rm -rf ./buildserver && babel -d ./buildserver ./server -s",
-    "build-all": "npm run build-server && npm run build && mv ./build ./buildserver/build",
+    "copy-settings": "cp now.json ./buildserver/now.json && cp now-package.json ./buildserver/package.json && cp -r ./build ./buildserver/build",
+    "build-all": "npm run build-server && npm run build && npm run copy-settings",
     "run-build": "node ./buildserver/index.js"
   },
   "eslintConfig": {

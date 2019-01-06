@@ -30,7 +30,6 @@ app.use(router.allowedMethods())
 app.use(Static('./build'))
 
 dotenv.config()
-console.log(process.env.NODE_ENV)
 
 const port = 9093
 let db_url = 'mongodb://localhost:27017/daily-info'
