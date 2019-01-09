@@ -14,9 +14,9 @@ const expense = (state=initalState, action) => {
     case ADD_EXPENSE_ITEM:
       return [...state, action.expenseItem]
     case LOADED_EXPENSE_ITEM:
-      return action.expenseItems.map(v => {
-        const {_id, date, ...item } = v
-        return {...item, id: _id, date: getYMD(new Date(date)) }
+      return action.expenseItems.map( v => {
+        const {date, _id, ...item} = v
+        return {...item, id: _id, date: getYMD(new Date(date))}
       })
     case DELETE_EXPENSE_ITEM:
       return state.filter(v=>!action.ids.includes(v.id))

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 
 import EnhancedTable from '../../components/EnhancedTable'
 import { fetchExpenseItems } from '../../actions/expense'
+import { getVisibleExpense } from '../../selectors/expense'
 
 const expenseModel = [
   {
@@ -56,6 +57,6 @@ ExpenseTable.propTypes = {
 }
 
 export default connect(
-  state=>state,
+  state => ({ expense: getVisibleExpense(state) }),
   { fetchExpenseItems }
 )(ExpenseTable)

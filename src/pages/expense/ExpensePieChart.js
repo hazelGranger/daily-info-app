@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 
 import PieChart from '../../components/charts/PieChart'
 import ExpenseTypeIcon from './ExpenseTypeIcon'
+import { getVisibleExpense } from '../../selectors/expense'
 
 class ExpensePieChart extends React.Component {
 
@@ -38,6 +39,6 @@ class ExpensePieChart extends React.Component {
 }
 
 export default connect(
-  state=>({ expense: state.expense }),
+  state=>({ expense: getVisibleExpense(state) }),
   null
 )(ExpensePieChart)
