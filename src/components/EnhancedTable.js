@@ -125,14 +125,14 @@ const toolbarStyles = theme => ({
     flex: '0 0 auto',
   },
   addIcon :{
-    color: theme.palette.primary.main
+    color: theme.palette.secondary.main
   }
 })
 
 class EnhancedTableToolbar extends React.Component {
 
   render(){
-    const { numSelected, classes, title, hasAddItem, hasFilter, addItem, deleteItem } = this.props
+    const { numSelected, classes, title, hasAddItem, hasFilter, addItem, deleteItem, handleSetTime } = this.props
     return (
       <Toolbar
         className={classNames(classes.root, {
@@ -163,6 +163,7 @@ class EnhancedTableToolbar extends React.Component {
             </Tooltip>
           ) : (
             <React.Fragment>
+              {handleSetTime ? handleSetTime : (<FilterListIcon />)}
               {hasAddItem ? (
                 <Tooltip title="Add Item">
                   <IconButton
@@ -279,7 +280,7 @@ class EnhancedTable extends React.Component {
   isSelected = id => this.state.selected.indexOf(id) !== -1
 
   render() {
-    const { classes, title, model, data, hasAddItem, hasFilter, handleAddItem } = this.props
+    const { classes, title, model, data, hasAddItem, hasFilter, handleAddItem, handleSetTime } = this.props
     const { order, orderBy, selected, rowsPerPage, page } = this.state
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage)
     return (
@@ -291,6 +292,7 @@ class EnhancedTable extends React.Component {
           hasFilter={hasFilter}
           addItem={handleAddItem}
           deleteItem={this.handleDeletItem}
+          handleSetTime={handleSetTime}
         />
         <div className={classes.tableWrapper}>
           <Table className={classes.table} aria-labelledby="tableTitle">

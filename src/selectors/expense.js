@@ -11,6 +11,7 @@ const getTimeFilter = state => state.time.timeForExpense
 
 const getExpense = state => state.expense
 
+// get expense in last several days, how many days before? in timeFilter.num
 export const getVisibleExpense = createSelector(
   [getTimeFilter, getExpense],
   (timeFilter, expense) => {
@@ -18,7 +19,9 @@ export const getVisibleExpense = createSelector(
       case SHOW_LAST_DAYS:
         return expense.filter(v => v.date>getDateBefore(timeFilter.num))
       case SHOW_ALL:
-          return expense
+        return expense
+      default:
+        return expense
     }
   }
 )
@@ -45,7 +48,7 @@ export const getLineChartExpense = createSelector(
       //obj['sum'] = obj['sum'] ? (obj['sum'] + v.price) : (0 + v.price)
       return ac
     }, [])
-
+    console.log(data);
     const datadisplay = getLastDays(timeFilter.num).reduce((ac, v)=>{
       let obj = data.find(d => d.name === v )
       ac.push(
