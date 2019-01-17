@@ -45,7 +45,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest --watch",
     "eject": "react-scripts eject",
     "serve": "nodemon ./server/index.js --exec babel-node ",
     "build-server": "rm -rf ./buildserver && babel -d ./buildserver ./server -s",
