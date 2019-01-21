@@ -54,12 +54,16 @@ class ExpenseTable extends Component{
     this.setState({ anchorEl: event.currentTarget })
   }
 
-  handleClose = (daysNum) => {
+  handleClose = () => {
     this.setState({anchorEl: null})
+  }
+
+  setTime = (daysNum) => {
     this.props.setTimeForExpense({
       name: 'SHOW_LAST_DAYS',
       num: daysNum
     })
+    this.handleClose()
   }
 
   componentDidMount (){
@@ -84,7 +88,7 @@ class ExpenseTable extends Component{
               <IconButton
                 aria-label="Select a time range"
                 className={classes.timeIcon}
-                aria-owns={anchorEl ? 'time range menu' : undefined}
+                aria-owns={anchorEl ? 'time-range-menu' : undefined}
                 aria-haspopup="true"
                 onClick={this.handleClick}
               >
@@ -92,14 +96,14 @@ class ExpenseTable extends Component{
               </IconButton>
             </Tooltip>
             <Menu
-              id="simple-menu"
+              id="time-range-menu"
               anchorEl={anchorEl}
               open={Boolean(anchorEl)}
-              onClose={this.handleClick}
+              onClose={this.handleClose}
               >
-              <MenuItem onClick={()=>this.handleClose(7)}>Last 7 Days</MenuItem>
-              <MenuItem onClick={()=>this.handleClose(30)}>Last Month</MenuItem>
-              <MenuItem onClick={()=>this.handleClose(90)}>Last Season</MenuItem>
+              <MenuItem onClick={()=>this.setTime(7)}>Last 7 Days</MenuItem>
+              <MenuItem onClick={()=>this.setTime(30)}>Last Month</MenuItem>
+              <MenuItem onClick={()=>this.setTime(90)}>Last Season</MenuItem>
             </Menu>
         </div>}
        />
