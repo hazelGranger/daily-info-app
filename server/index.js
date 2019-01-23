@@ -9,6 +9,7 @@ import Static from 'koa-static'
 import mongoose from 'mongoose'
 import { routes } from './routes'
 import dotenv from 'dotenv'
+import currencySpider from './spider/currency/index'
 
 const app = new Koa()
 const router = new Router()
@@ -30,6 +31,7 @@ app.use(router.allowedMethods())
 app.use(Static('./build'))
 
 dotenv.config()
+currencySpider()
 
 const port = 9093
 let db_url = 'mongodb://localhost:27017/daily-info'

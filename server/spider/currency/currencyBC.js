@@ -1,4 +1,5 @@
 import puppeteer from 'puppeteer'
+import Controller from '../../controllers/currency'
 
 const chrome = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36'
 
@@ -44,8 +45,22 @@ export const getRatesFromBC = async () => {
   } catch (e) {
     console.log('error: ', e)
   }
+}
 
-
-
-
+export const createBankofChina = () => {
+  Controller.create({
+    bankName: 'BC',
+    currencyCountries: [{
+      name: 'NZ',
+      rates: [
+        {
+          BR: 455.7,
+          SR: 458.9,
+          CBR: 441.64,
+          CSR: 464.53,
+          date: '2019-01-23T03:24:00'
+        }
+      ]
+    }]
+  })
 }
