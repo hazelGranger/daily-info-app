@@ -31,7 +31,6 @@ async function deleteBankByName(name) {
 }
 
 async function addNewCountry(bank, country) {
-  console.log(bank, country, 'addNewCountry');
   const thisBank = await Currency.findOne({bankName: bank})
   thisBank.currencyCountries.push({
     name: country,
@@ -55,9 +54,7 @@ async function deleteCountryByName(bank, country) {
 }
 
 async function addRateForCountryByDate(bank, country, rate) {
-  console.log(rate, 'addRateForCountryByDate');
   const thisBank = await Currency.findOne({bankName: bank})
-  console.log(thisBank);
   thisBank.currencyCountries.find(v => v.name === country ).rates.push(rate)
   const saved = thisBank.save()
   return saved
@@ -77,7 +74,6 @@ async function  initBank(bank, countryNamesMap) {
   const newBank = await create(bank)
   if (newBank) {
     const countries = [...countryNamesMap.keys()].map(async v => {
-      console.log(v, bank);
       await addNewCountry(bank, v)
     })
   }

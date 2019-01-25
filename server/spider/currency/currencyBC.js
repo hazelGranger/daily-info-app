@@ -1,6 +1,7 @@
 import puppeteer from 'puppeteer'
 import Controller from '../../controllers/currency'
 import { getAbbrByCHName, currencyContries, countryNamesMap } from '../../utils/countriesMap'
+import { getYMD } from '../../utils/timeFormat'
 
 const CHROME = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36'
 const BANK_NAME = 'BC'
@@ -22,7 +23,6 @@ export const crawlRatesFromBC = async () => {
       if (i > 0) {
         const name = await tr.$eval('td', td => td.innerText)
         if (currencyContries.includes(name)) {
-          console.log(name);
           let currency = await tr.$$eval('td', tds => tds.map( v => v.innerText))
           return currency
         }
@@ -32,7 +32,7 @@ export const crawlRatesFromBC = async () => {
 
     // resolve Promises, and save them in mongodb
     const rates = await names.map( v => {
-      return v.then(async (rate) => {
+      v.then(async (rate) => {
         // country -> rate[0]
         let country = getAbbrByCHName(rate[0])
         let hasCountry = await Controller.findCountryByName(BANK_NAME, country)
@@ -57,4 +57,14 @@ export const crawlRatesFromBC = async () => {
 
 export const initBC = () => {
   Controller.initBank(BANK_NAME, countryNamesMap)
+}
+
+export const isCrawled = async () => {
+  const rates = await Controller.findACountryCurrencyByDate( 'BC', 'NZD', getYMD(new Date(Date.now())) )
+  return rates.length > 0 ? false : true
+}
+
+export const requiredInit = async () => {
+  const BC = await Controller.findBank('BC')
+  return BC.length===0 ? true : false
 }
