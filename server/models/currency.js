@@ -10,7 +10,7 @@ const CurrencySchema = new mongoose.Schema({
         SR: Number, // Selling Rate
         CBR: Number, // Cash Buying Rate
         CSR: Number, // Cash Selling Rate
-        date: Date
+        date: { type: Date, default: Date.now }
       }
     ]
   }]

@@ -1,7 +1,11 @@
 import Currency from '../models/currency'
+import { getYMD } from '../utils/timeFormat'
 
-async function create(currency) {
-  const currencyRate = new Currency(currency)
+async function create(bankName) {
+  const currencyRate = new Currency({
+    bankName: bankName,
+    currencyCountries: []
+  })
   const saveCurrency = await currencyRate.save()
   return saveCurrency
 }
@@ -16,24 +20,79 @@ async function findBank(bankName) {
   return currencyRates
 }
 
-async function deleteByID(id) {
-  const removedCurrencyRates = await Currency.remove({_id: id})
-  return removedCurrencyRates
+async function deleteBankByID(id) {
+  const removed= await Currency.deleteOne({_id: id})
+  return removed
+}
+
+async function deleteBankByName(name) {
+  const removed = await Currency.deleteMany({bankName: name})
+  return removed
 }
 
 async function addNewCountry(bank, country) {
-  const rate = await Currency.findOne({bankName: bank})
-  rate.currencyCountries.push({
+  console.log(bank, country, 'addNewCountry');
+  const thisBank = await Currency.findOne({bankName: bank})
+  thisBank.currencyCountries.push({
     name: country,
     rates: []
   })
-  rate.save()
+  const savedBank = await thisBank.save()
+  return savedBank
+}
+
+async function findCountryByName(bank, country) {
+  const thisBank = await Currency.findOne({bankName: bank})
+  const countryName =  thisBank.currencyCountries.find(v => v.name === country)
+  return countryName
+}
+
+async function deleteCountryByName(bank, country) {
+  const thisBank = await Currency.updateOne({bankName: bank}, {
+    $pull: { "currencyCountries": {"name": country}}
+  })
+  return thisBank
+}
+
+async function addRateForCountryByDate(bank, country, rate) {
+  console.log(rate, 'addRateForCountryByDate');
+  const thisBank = await Currency.findOne({bankName: bank})
+  console.log(thisBank);
+  thisBank.currencyCountries.find(v => v.name === country ).rates.push(rate)
+  const saved = thisBank.save()
+  return saved
+}
+
+async function findACountryCurrencyByDate(bank, country, date) {
+  const thisBank = await Currency.findOne({bankName: bank})
+  const thisDateRate =  thisBank.currencyCountries.find(v => v.name === country).rates.find(
+    r => {
+      return getYMD(new Date(r.date)) === date
+    }
+  )
+  return thisDateRate
+}
+
+async function  initBank(bank, countryNamesMap) {
+  const newBank = await create(bank)
+  if (newBank) {
+    const countries = [...countryNamesMap.keys()].map(async v => {
+      console.log(v, bank);
+      await addNewCountry(bank, v)
+    })
+  }
 }
 
 export default {
+  initBank,
   create,
   findAll,
   findBank,
-  deleteByID,
-  addNewCountry
+  deleteBankByID,
+  deleteBankByName,
+  addNewCountry,
+  findCountryByName,
+  addRateForCountryByDate,
+  deleteCountryByName,
+  findACountryCurrencyByDate,
 }
