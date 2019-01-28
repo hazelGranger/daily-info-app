@@ -12,22 +12,20 @@ const currencySpider = async () => {
 
   //Create a BC bank structure if there is not
   //const BC = await Controller.findBank('BC')
-  //Controller.deleteBankByName('BC')
+  // Controller.deleteBankByName('BC')
   const isRequiredInit = await requiredInit()
-  
-  if (isRequiredInit) {
 
+  if (isRequiredInit) {
     await initBC()
     await crawlRatesFromBC()
-
   } else {
 
     const isCrawledToday = await isCrawled()
     if (!isCrawledToday) {
       await crawlRatesFromBC()
     }
-
   }
+
 }
 
 export default currencySpider

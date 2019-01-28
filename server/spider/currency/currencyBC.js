@@ -61,7 +61,7 @@ export const initBC = () => {
 
 export const isCrawled = async () => {
   const rates = await Controller.findACountryCurrencyByDate( 'BC', 'NZD', getYMD(new Date(Date.now())) )
-  return rates.length > 0 ? false : true
+  return rates ? true : false
 }
 
 export const requiredInit = async () => {
