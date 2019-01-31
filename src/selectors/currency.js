@@ -23,3 +23,14 @@ export const getLast2DaysRates = createSelector(
     }
   }
 )
+
+export const getAllCountries = createSelector(
+  [getRates, getShowingBank],
+  (rates, bank) => {
+    const bankExist = rates.find(v => v.bankName === bank)
+    if (bankExist) {
+      const countries = bankExist['currencyCountries'].map(v => v.name)
+      return countries
+    }
+  }
+)

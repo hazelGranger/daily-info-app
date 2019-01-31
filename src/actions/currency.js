@@ -20,3 +20,13 @@ export const get7DaysRatesAllCountry = () => {
     dispatch(loadCurrency(res.data))
   }
 }
+
+export const setShowingBank = (bank) => ({
+  type: SET_SHOWING_BANK,
+  bank
+})
+
+export const setShowingCountry = (country) => ({
+  type: SET_SHOWING_COUNTRY,
+  country
+})

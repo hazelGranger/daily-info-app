@@ -10,6 +10,7 @@ import { get7DaysRatesAllCountry } from '../actions/currency'
 import { getLast2DaysRates } from '../selectors/currency'
 
 import RateCard from './currency/RateCard'
+import SelectGroup from './currency/SelectGroup'
 
 const styles = theme => ({
   paper: {
@@ -29,6 +30,7 @@ class Currency extends Component {
     const { classes, last2DaysRates } = this.props
     return(
       <div>
+        <SelectGroup />
         <Grid container spacing={24}>
           <Grid item xs={12} sm={6} lg={3}>
             <Paper className={classes.paper}>
