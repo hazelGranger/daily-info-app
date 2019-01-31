@@ -1,4 +1,8 @@
 // reducer
+import {
+  LOAD_CURRENCY
+} from '../actions/currency'
+
 const initState = {
   bank: 'BC',
   country: 'NZD',
@@ -7,8 +11,8 @@ const initState = {
 
 const currency = (state=initState, action) => {
   switch (action.type) {
-    case 'ADD_EXPENSE_ITEM':
-      return state
+    case 'LOAD_CURRENCY':
+      return {...state, rates: action.currencies}
     default:
       return state
   }

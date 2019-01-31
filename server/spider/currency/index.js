@@ -9,7 +9,6 @@ import Controller from '../../controllers/currency'
 import { getYMD, countryNamesMap } from '../../utils/timeFormat'
 
 const currencySpider = async () => {
-
   //Create a BC bank structure if there is not
   //const BC = await Controller.findBank('BC')
   // Controller.deleteBankByName('BC')

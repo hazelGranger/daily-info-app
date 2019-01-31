@@ -48,7 +48,7 @@
     "build": "react-scripts build",
     "test": "jest --watch",
     "eject": "react-scripts eject",
-    "serve": "nodemon ./server/index.js --exec babel-node ",
+    "serve": "nodemon ./server/index.js --watch server --exec babel-node ",
     "build-server": "rm -rf ./buildserver && babel -d ./buildserver ./server -s",
     "copy-settings": "cp now.json ./buildserver/now.json && cp now-package.json ./buildserver/package.json && cp -r ./build ./buildserver/build",
     "build-all": "npm run build-server && npm run build && npm run copy-settings",
