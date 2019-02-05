@@ -12,6 +12,33 @@ import { connect } from 'react-redux'
 import { setShowingCountry, setShowingBank } from '../../actions/currency'
 import { getAllCountries } from '../../selectors/currency'
 
+import AudFlag from '../../img/flag_aud.png'
+import CadFlag from '../../img/flag_cad.png'
+import EurFlag from '../../img/flag_eur.png'
+import GbpFlag from '../../img/flag_gbp.png'
+import HkdFlag from '../../img/flag_hkd.png'
+import NzdFlag from '../../img/flag_nzd.png'
+import PrcFlag from '../../img/flag_prc.png'
+import ThbFlag from '../../img/flag_nzd.png'
+import TwdFlag from '../../img/flag_twd.png'
+import UsdFlag from '../../img/flag_usd.png'
+import YenFlag from '../../img/flag_yen.png'
+
+const flagsOfCountries = {
+  AUD: AudFlag,
+  CAD: CadFlag,
+  EUR: EurFlag,
+  GBP: GbpFlag,
+  HKD: HkdFlag,
+  NZD: NzdFlag,
+  PRC: PrcFlag,
+  THB: ThbFlag,
+  TWD: TwdFlag,
+  USD: UsdFlag,
+  Yen: YenFlag
+}
+
+
 const styles = theme => ({
   selectGroup: {
     marginBottom: 16,
@@ -26,6 +53,14 @@ const styles = theme => ({
     width: '100%',
     minWidth: 120,
   },
+  flags: {
+    width: 32,
+    marginRight: 16
+  },
+  flagContainer: {
+    display: 'flex',
+    alignItems: 'center'
+  }
 })
 
 class SelectGroup extends React.Component{
@@ -58,8 +93,18 @@ class SelectGroup extends React.Component{
                 name="bank"
                 id="bank"
               >
-                <MenuItem value="BC">BC</MenuItem>
-                <MenuItem value="ICBC">ICBC</MenuItem>
+                <MenuItem value="BC">
+                  <div className={classes.flagContainer}>
+                    <img className={classes.flags} src={flagsOfCountries['PRC']} alt="BC"/>
+                    <span>BC</span>
+                  </div>
+                </MenuItem>
+                <MenuItem value="ICBC">
+                  <div className={classes.flagContainer}>
+                    <img className={classes.flags} src={flagsOfCountries['PRC']} alt="ICBC"/>
+                    <span>ICBC</span>
+                  </div>
+                </MenuItem>
               </Select>
             </FormControl>
           </Paper>
@@ -67,7 +112,7 @@ class SelectGroup extends React.Component{
         <Grid item xs={12} sm={3}>
           <Paper className={classes.paper}>
             <FormControl className={classes.formControl}>
-              <InputLabel htmlFor="country">Country</InputLabel>
+              <InputLabel htmlFor="country">Currency Region</InputLabel>
               <Select
                 value={this.state.country}
                 onChange={this.handleChange}
@@ -77,7 +122,12 @@ class SelectGroup extends React.Component{
                 {
                   countries ? (
                     countries.map( v=> (
-                      <MenuItem key={v} value={v} >{v}</MenuItem>
+                      <MenuItem key={v} value={v} >
+                        <div className={classes.flagContainer}>
+                          <img className={classes.flags} src={flagsOfCountries[v]} alt={v}/>
+                          <span>{v}</span>
+                        </div>
+                      </MenuItem>
                     ))
                   ) : null
                 }
