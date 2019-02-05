@@ -65,8 +65,8 @@ const styles = theme => ({
 
 class SelectGroup extends React.Component{
   state = {
-    bank: 'BC',
-    country: 'NZD'
+    bank: this.props.bank,
+    country: this.props.country
   }
   handleChange = (event) => {
     this.setState({
