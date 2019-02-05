@@ -19,7 +19,7 @@ const LineChart = (props) => {
     <ResponsiveContainer width="98%" height={height}>
       <MuiLineChart data={data}>
         <XAxis dataKey={xKey} />
-        <YAxis />
+        <YAxis domain={['dataMin', 'dataMax']} />
         <CartesianGrid vertical={false} strokeDasharray="3 3" />
         <Tooltip />
         <Legend />

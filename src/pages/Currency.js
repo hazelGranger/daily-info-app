@@ -11,6 +11,7 @@ import { getLast2DaysRates } from '../selectors/currency'
 
 import RateCard from './currency/RateCard'
 import SelectGroup from './currency/SelectGroup'
+import CurrencyLineChart from './currency/CurrencyLineChart'
 
 const styles = theme => ({
   paper: {
@@ -66,6 +67,13 @@ class Currency extends Component {
                 rate={last2DaysRates ? last2DaysRates['today']['CSR'] : 0}
                 ydaRate={last2DaysRates ? last2DaysRates['yda']['CSR'] : 0}
               />
+            </Paper>
+          </Grid>
+        </Grid>
+        <Grid container spacing={24}>
+          <Grid item xs={12}>
+            <Paper className={classes.paper}>
+              <CurrencyLineChart />
             </Paper>
           </Grid>
         </Grid>
