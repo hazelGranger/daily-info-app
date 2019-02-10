@@ -17,6 +17,7 @@ class Map extends React.Component {
       zoom: zoom
     })
   }
+
   render(){
     return(
       <div ref={el => this.mapContainer = el} className="absolute top right left bottom" />

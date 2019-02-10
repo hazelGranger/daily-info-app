@@ -4,6 +4,8 @@ import Map from '../components/Map'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
+import { fetchWeatherData } from '../actions/weather'
+import { connect } from 'react-redux'
 
 const styles = theme => ({
   mapContainer: {
@@ -13,6 +15,10 @@ const styles = theme => ({
 })
 
 class Weather extends React.Component {
+  componentDidMount() {
+    this.props.fetchWeatherData()
+  }
+
   render(){
     const { classes } = this.props
     return(
@@ -31,4 +37,11 @@ class Weather extends React.Component {
   }
 }
 
-export default withStyles(styles)(Weather)
+export default connect(
+  state => ({
+    weather: state => state.weather
+  }),
+  {
+    fetchWeatherData
+  }
+)(withStyles(styles)(Weather))
