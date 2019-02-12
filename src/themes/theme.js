@@ -44,6 +44,9 @@ export const theme =  createMuiTheme({
     },
     drawer: {
       width: 240
+    },
+    weatherIcon: {
+      width: 64
     }
   }
 })

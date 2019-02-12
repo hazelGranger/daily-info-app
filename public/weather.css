@@ -1,0 +1,45 @@
+.weather-marker{
+  width: 48px;
+  height: 48px;
+  background-size: contain;
+}
+
+.weather-marker.cloudy{
+  background-image: url('./icons/cloudy.png');
+}
+.weather-marker.drizzle{
+  background-image: url('./icons/drizzle.png');
+}
+.weather-marker.few-showers{
+  background-image: url('./icons/few-showers.png');
+}
+.weather-marker.foggy{
+  background-image: url('./icons/foggy.png');
+}
+.weather-marker.frost{
+  background-image: url('./icons/frost.png');
+}
+.weather-marker.hail{
+  background-image: url('./icons/hail.png');
+}
+.weather-marker.partly-cloudy{
+  background-image: url('./icons/partly-cloudy.png');
+}
+.weather-marker.rain{
+  background-image: url('./icons/rain.png');
+}
+.weather-marker.showers{
+  background-image: url('./icons/showers.png');
+}
+.weather-marker.snow{
+  background-image: url('./icons/snow.png');
+}
+.weather-marker.sunny{
+  background-image: url('./icons/sunny.png');
+}
+.weather-marker.thunder{
+  background-image: url('./icons/thunder.png');
+}
+.weather-marker.windy{
+  background-image: url('./icons/windy.png');
+}

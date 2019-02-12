@@ -1,0 +1,16 @@
+export const forecastWords = {
+  'Cloudy': 'cloudy',
+  'Drizzle': 'drizzle',
+  'Few showers': 'few-showers',
+  'Fine': 'sunny',
+  'Fog': 'foggy',
+  'Frost': 'frost',
+  'Hail': 'hail',
+  'Partly cloudy': 'partly-cloudy',
+  'Rain': 'rain',
+  'Showers': 'showers',
+  'Snow': 'snow',
+  'Thunder':'thunder',
+  'Windy': 'windy',
+  'Wind rain': 'windy',
+}
