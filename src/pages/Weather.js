@@ -24,7 +24,6 @@ class Weather extends React.Component {
 
   render(){
     const { classes, weather } = this.props
-    console.log(this.props, weather, 'weatherw');
     return(
       <div>
         <Grid container spacing={24}>

@@ -43,3 +43,19 @@
 .weather-marker.windy{
   background-image: url('./icons/windy.png');
 }
+.popuptext{
+  text-transform: uppercase;
+  padding: 0 8px 0 4px;
+}
+.popuptext.city{
+  font-weight: bold;
+  font-size: 16px;
+}
+.popuptext .degree{
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.mapboxgl-popup .mapboxgl-popup-close-button{
+  right: 4px;
+}

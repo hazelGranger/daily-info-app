@@ -26,8 +26,12 @@ class Map extends React.Component {
         let el = document.createElement('div')
         el.className = 'weather-marker ' + forecastWords[v.forecastWord]
 
+        let popup = new mapboxgl.Popup({ offset: 25 })
+            .setHTML(this.renderPopup(v.location, v.max, v.min))
+
         new mapboxgl.Marker(el)
         .setLngLat(v.coordinates)
+        .setPopup(popup)
         .addTo(this.map)
 
       })
@@ -68,8 +72,15 @@ class Map extends React.Component {
     //     })
     //
     // })
+  }
 
-}
+  renderPopup(location, max, min) {
+    return `
+      <p class="popuptext city">${location}</p>
+      <p class="popuptext">high: <span class="degree">${max}</span> ℃</p>
+      <p class="popuptext">low : <span class="degree"> ${min}</span> ℃</p>
+    `
+  }
 
   render() {
     return(
