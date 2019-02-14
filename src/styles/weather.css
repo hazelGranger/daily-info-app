@@ -1,0 +1,61 @@
+.weather-marker{
+  width: 48px;
+  height: 48px;
+  background-size: contain;
+}
+
+.weather-marker.cloudy{
+  background-image: url('https://i.imgur.com/B6FIKS2.png');
+}
+.weather-marker.drizzle{
+  background-image: url('https://i.imgur.com/kcmPWF3.png');
+}
+.weather-marker.few-showers{
+  background-image: url('https://i.imgur.com/XKWpF8T.png');
+}
+.weather-marker.foggy{
+  background-image: url('https://i.imgur.com/EsFDaCe.png');
+}
+.weather-marker.frost{
+  background-image: url('https://i.imgur.com/UMHbktE.png');
+}
+.weather-marker.hail{
+  background-image: url('https://i.imgur.com/KRa72xn.png');
+}
+.weather-marker.partly-cloudy{
+  background-image: url('https://i.imgur.com/IT1RnFt.png');
+}
+.weather-marker.rain{
+  background-image: url('https://i.imgur.com/MGndC3L.png');
+}
+.weather-marker.showers{
+  background-image: url('https://i.imgur.com/2P2H8dU.png');
+}
+.weather-marker.snow{
+  background-image: url('https://i.imgur.com/a2IeF1K.png');
+}
+.weather-marker.sunny{
+  background-image: url('https://i.imgur.com/IScayLh.png');
+}
+.weather-marker.thunder{
+  background-image: url('https://i.imgur.com/BjbeES0.png');
+}
+.weather-marker.windy{
+  background-image: url('https://i.imgur.com/Q1q2f2s.png');
+}
+.popuptext{
+  text-transform: uppercase;
+  padding: 0 8px 0 4px;
+}
+.popuptext.city{
+  font-weight: bold;
+  font-size: 16px;
+}
+.popuptext .degree{
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.mapboxgl-popup .mapboxgl-popup-close-button{
+  right: 4px;
+}

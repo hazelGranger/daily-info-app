@@ -11,6 +11,7 @@ import ExpenseLineChart from './expense/ExpenseLineChart'
 import ExpensePieChart from './expense/ExpensePieChart'
 import { saveExpenseItem, deleteSelectedItems } from '../actions/expense'
 import { showNotification, closeNotification } from '../actions/notification'
+import { fetchWeatherData } from '../actions/weather'
 
 import { withStyles } from '@material-ui/core/styles'
 
@@ -37,6 +38,10 @@ class Expense extends Component {
       deleteError: 'Deleting items failed!',
     }
   }
+
+  // componentDidMount() {
+  //   this.props.fetchWeatherData()
+  // }
 
   handleAddItem = () => {
     this.setState({ modalOpen: true })
@@ -117,5 +122,6 @@ export default withStyles(styles)(
     deleteSelectedItems,
     showNotification,
     closeNotification,
+    fetchWeatherData
   }
 )(Expense))

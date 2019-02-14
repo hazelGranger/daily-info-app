@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import mapboxgl from 'mapbox-gl'
+import '../styles/weather.css'
 
 import { forecastWords } from '../utils/forecastWords'
 
@@ -9,6 +10,23 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiaGF6ZWxncmFuZ2VyIiwiYSI6ImNqcnU2MXp2MDBqaWo0N
 class Map extends React.Component {
 
   map;
+
+  drawWeather(map) {
+    console.log('draw');
+    this.props.weatherData.nz.forEach((v) => {
+      let el = document.createElement('div')
+      el.className = 'weather-marker ' + forecastWords[v.forecastWord]
+
+      let popup = new mapboxgl.Popup({ offset: 25 })
+          .setHTML(this.renderPopup(v.location, v.max, v.min, v.forecastWord))
+
+      new mapboxgl.Marker(el)
+      .setLngLat(v.coordinates)
+      .setPopup(popup)
+      .addTo(map)
+    })
+
+  }
 
   componentDidMount() {
 
@@ -21,62 +39,18 @@ class Map extends React.Component {
     })
 
     this.map.on('load', () => {
-
-      this.props.weatherData.nz.forEach((v) => {
-        let el = document.createElement('div')
-        el.className = 'weather-marker ' + forecastWords[v.forecastWord]
-
-        let popup = new mapboxgl.Popup({ offset: 25 })
-            .setHTML(this.renderPopup(v.location, v.max, v.min))
-
-        new mapboxgl.Marker(el)
-        .setLngLat(v.coordinates)
-        .setPopup(popup)
-        .addTo(this.map)
-
-      })
+      this.drawWeather(this.map)
     })
-
-    // let popup = new mapboxgl.Popup({closeOnClick: false})
-    // .setLngLat(center)
-    // .setHTML('<img src="./icons/windy.png" alt="windy" />')
-    // .addTo(this.map)
-
-    // this.map.on('load', () => {
-    //
-    //     this.map.loadImage('./icons/windy.png', (err, img)=> {
-    //
-    //       this.map.addImage('weather', img)
-    //
-    //       this.map.addLayer({
-    //         "id": "points",
-    //         "type": "symbol",
-    //         "source": {
-    //           "type": "geojson",
-    //           "data": {
-    //             "type": "FeatureCollection",
-    //             "features": [{
-    //               "type": " Feature",
-    //               "geometry": {
-    //                 "type": "Point",
-    //                 "coordinates": [175, -40]
-    //               }
-    //             }]
-    //           }
-    //         },
-    //         "layout": {
-    //           "icon-image": "weather",
-    //           "icon-size": 0.5
-    //         }
-    //       })
-    //     })
-    //
-    // })
   }
 
-  renderPopup(location, max, min) {
+  componentDidUpdate(nextProps) {
+    this.drawWeather(this.map)
+  }
+
+  renderPopup(location, max, min, forecastWord) {
     return `
       <p class="popuptext city">${location}</p>
+      <p class="popuptext" >${forecastWord}</p>
       <p class="popuptext">high: <span class="degree">${max}</span> ℃</p>
       <p class="popuptext">low : <span class="degree"> ${min}</span> ℃</p>
     `
