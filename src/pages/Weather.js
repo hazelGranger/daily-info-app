@@ -2,13 +2,9 @@ import React from 'react'
 import Map from '../components/Map'
 
 import Grid from '@material-ui/core/Grid'
-import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 import { fetchWeatherData } from '../actions/weather'
 import { connect } from 'react-redux'
-import WeatherIcon from './weather/WeatherIcon'
-import windy from '../img/weather/windy.svg'
-import flag from '../img/flag_aud.png'
 
 const styles = theme => ({
   mapContainer: {

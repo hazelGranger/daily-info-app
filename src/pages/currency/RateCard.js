@@ -47,8 +47,4 @@ class RateCard extends React.Component {
   }
 }
 
-export default withStyles(styles)
-(
-  withTheme()
-  (RateCard)
-)
+export default withStyles(styles)(withTheme()(RateCard))

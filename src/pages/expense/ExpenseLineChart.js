@@ -2,8 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import LineChart from '../../components/charts/LineChart'
-import { getVisibleExpense, getLineChartExpense } from '../../selectors/expense'
-import { getLastDays } from '../../utils/timeFormat'
+import { getLineChartExpense } from '../../selectors/expense'
 
 const ExpenseLineChart = (props) => {
   const yKey = [

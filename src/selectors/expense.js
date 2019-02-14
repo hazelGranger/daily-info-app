@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect'
 
-import { getYMD, getDateBefore, getLastDays } from '../utils/timeFormat'
+import { getDateBefore, getLastDays } from '../utils/timeFormat'
 
 import {
   SHOW_LAST_DAYS,

@@ -1,5 +1,4 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import mapboxgl from 'mapbox-gl'
 import '../styles/weather.css'
 
@@ -12,7 +11,6 @@ class Map extends React.Component {
   map;
 
   drawWeather(map) {
-    console.log('draw');
     this.props.weatherData.nz.forEach((v) => {
       let el = document.createElement('div')
       el.className = 'weather-marker ' + forecastWords[v.forecastWord]
@@ -30,7 +28,7 @@ class Map extends React.Component {
 
   componentDidMount() {
 
-    const { center, zoom, icon } = this.props
+    const { center, zoom } = this.props
     this.map = new mapboxgl.Map({
       container: this.mapContainer,
       style: 'mapbox://styles/mapbox/streets-v11',
